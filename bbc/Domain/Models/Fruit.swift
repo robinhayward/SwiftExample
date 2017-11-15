@@ -8,12 +8,8 @@
 
 import Foundation
 
-protocol Fruit {
-  var uuid: String { get }
-  var name: String { get }
-}
-
-struct FruitEntity: Fruit {
-  let uuid: String
-  let name: String
+struct Fruit: Codable {
+  let type: String
+  let price: Int
+  let weight: Int
 }

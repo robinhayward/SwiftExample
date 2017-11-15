@@ -31,6 +31,8 @@
 		0B295D301FBC994400898DA7 /* FruitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B295D2F1FBC994400898DA7 /* FruitCell.xib */; };
 		0B295D321FBC994E00898DA7 /* FruitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D311FBC994E00898DA7 /* FruitCell.swift */; };
 		0B295D351FBC99BB00898DA7 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D341FBC99BB00898DA7 /* AppRouter.swift */; };
+		0B295D381FBCA50F00898DA7 /* Threads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D371FBCA50F00898DA7 /* Threads.swift */; };
+		0B295D3B1FBCA63800898DA7 /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D3A1FBCA63800898DA7 /* Usage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,8 @@
 		0B295D2F1FBC994400898DA7 /* FruitCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FruitCell.xib; sourceTree = "<group>"; };
 		0B295D311FBC994E00898DA7 /* FruitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitCell.swift; sourceTree = "<group>"; };
 		0B295D341FBC99BB00898DA7 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		0B295D371FBCA50F00898DA7 /* Threads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Threads.swift; sourceTree = "<group>"; };
+		0B295D3A1FBCA63800898DA7 /* Usage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +177,8 @@
 		0B295D0F1FBC909400898DA7 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				0B295D391FBCA62A00898DA7 /* Services */,
+				0B295D361FBCA50400898DA7 /* Helpers */,
 				0B295D211FBC912000898DA7 /* Repositories */,
 				0B295D201FBC90FD00898DA7 /* Models */,
 			);
@@ -228,6 +234,22 @@
 				0B295D341FBC99BB00898DA7 /* AppRouter.swift */,
 			);
 			path = Routes;
+			sourceTree = "<group>";
+		};
+		0B295D361FBCA50400898DA7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0B295D371FBCA50F00898DA7 /* Threads.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		0B295D391FBCA62A00898DA7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0B295D3A1FBCA63800898DA7 /* Usage.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,6 +368,8 @@
 				0B295D291FBC930400898DA7 /* Result.swift in Sources */,
 				0B295D191FBC90F900898DA7 /* FruitListingAssembler.swift in Sources */,
 				0B295CFC1FBC8F4100898DA7 /* FruitDetailInteractor.swift in Sources */,
+				0B295D3B1FBCA63800898DA7 /* Usage.swift in Sources */,
+				0B295D381FBCA50F00898DA7 /* Threads.swift in Sources */,
 				0B295D321FBC994E00898DA7 /* FruitCell.swift in Sources */,
 				0B295CFF1FBC8F4100898DA7 /* FruitDetailEntity.swift in Sources */,
 				0B295D1C1FBC90F900898DA7 /* FruitListingInteractor.swift in Sources */,

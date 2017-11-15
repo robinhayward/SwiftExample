@@ -100,7 +100,7 @@ extension FruitListingView: UITableViewDelegate, UITableViewDataSource {
 
 class FruitCellConfigurator {
   class func configure(_ cell: FruitCell, with fruit: Fruit) {
-    cell.nameLabel?.text = fruit.name
+    cell.nameLabel?.text = fruit.type
   }
 }
 

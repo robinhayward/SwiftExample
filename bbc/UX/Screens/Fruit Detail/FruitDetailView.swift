@@ -31,6 +31,6 @@ class FruitDetailView: UIViewController, FruitDetailUI {
   // MARK: FruitDetailUI
 
   func update(_ fruit: Fruit) {
-    title = fruit.name
+    title = fruit.type
   }
 }
