@@ -20,15 +20,13 @@ class FruitDetailSpec: QuickSpec {
 
     describe("Fruit detail") {
       beforeEach {
+        ui = FruitDetailUISpy()
         assembly = FruitDetailAssemblyTest()
+        sut = FruitDetailAssembler.assemble(assembly: assembly) as! FruitDetailView
+        sut.presenter.ui = ui
       }
       describe("when the user first arrives") {
         beforeEach {
-          ui = FruitDetailUISpy()
-          
-          sut = FruitDetailAssembler.assemble(assembly: assembly) as! FruitDetailView
-          sut.presenter.ui = ui
-
           sut.viewWillAppear(false)
         }
         it("sends the correct usage report for display") {
@@ -50,11 +48,6 @@ class FruitDetailSpec: QuickSpec {
 
       describe("when the user is done") {
         beforeEach {
-          ui = FruitDetailUISpy()
-
-          sut = FruitDetailAssembler.assemble(assembly: assembly) as! FruitDetailView
-          sut.presenter.ui = ui
-
           sut.viewWillAppear(false)
           sut.user.done()
         }
