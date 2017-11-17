@@ -28,7 +28,7 @@ struct UsageReportRequest {
   let config: APIConfig
   let report: UsageReport
 
-  private let resource = "stats"
+  private let resource = "/stats"
 
   func create() -> URLRequest? {
     guard let url = url() else { return nil }
@@ -49,6 +49,6 @@ struct UsageReportRequest {
       query = "\(query)&\(encodedKey)=\(encodedValue)"
     }
 
-    return URL(string: "\(resource)?\(query)")
+    return URL(string: "\(config.host)\(resource)?\(query)")
   }
 }

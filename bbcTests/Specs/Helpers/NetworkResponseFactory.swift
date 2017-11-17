@@ -11,6 +11,10 @@ import Foundation
 @testable import bbc
 
 class NetworkResponseFactory {
+  class func statusTwoHundredNoDataExpected() -> APIResponse {
+    return APIResponse(nil, HTTPURLResponseFactory.good(), nil, 0.7)
+  }
+
   class func fruit() -> APIResponse {
     return APIResponse(JSONFactory.fruit(), HTTPURLResponseFactory.good(), nil, 0.7)
   }

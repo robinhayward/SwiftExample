@@ -27,9 +27,9 @@ protocol UsageReporter {
 }
 
 class Usage: UsageReporter {
-  let api: API
+  let api: APIInterface
 
-  init(api: API = API.shared) {
+  init(api: APIInterface = API.shared) {
     self.api = api
   }
 

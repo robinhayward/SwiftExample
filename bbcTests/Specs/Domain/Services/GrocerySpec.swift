@@ -87,14 +87,3 @@ class GrocerySpec: QuickSpec {
     }
   }
 }
-
-class APIInterfaceFake: APIInterface {
-  let config: APIConfig = APIConfig()
-  var request: URLRequest?
-  var completion: ((APIResponse) -> ())?
-
-  func run(_ request: URLRequest, _ completion: @escaping ((APIResponse) -> ())) {
-    self.request = request
-    self.completion = completion
-  }
-}
