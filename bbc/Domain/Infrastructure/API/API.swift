@@ -17,6 +17,8 @@ class API: APIInterface {
   let config: APIConfig
   let session: URLSession
 
+  private let loggingEnabled = true
+
   init(config: APIConfig = APIConfig(), session: URLSession = URLSession.shared) {
     self.config = config
     self.session = session
@@ -25,9 +27,11 @@ class API: APIInterface {
   func fruit(completion: @escaping (APIResponse) -> ()) {
     let url = URL(string: "\(config.host)/data.json")!
     let request = URLRequest(url: url)
-    let task = session.dataTask(with: request) { (data, response, error) in
+    let task = session.dataTask(with: request) { [weak self] (data, response, error) in
       SwitchToMainThread.with {
-        completion(APIResponse(data, response, error))
+        let response = APIResponse(data, response, error)
+        self?.log(request, response)
+        completion(response)
       }
     }
 
@@ -36,14 +40,28 @@ class API: APIInterface {
 
   func send(_ report: UsageReport) {
     let resource = "\(config.host)/stats"
-    let url = UsageReportUrl.create(resource: resource, report: report)
-    let request = URLRequest(url: url)
-    let task = session.dataTask(with: request) { (data, response, error) in
+
+    guard
+      let request = UsageReportUrlRequest(report, resource).create()
+    else {
+      debugPrint("Failed to register usage report for: \(report)")
+      return
+    }
+
+    let task = session.dataTask(with: request) { [weak self] (data, response, error) in
       SwitchToMainThread.with {
-        debugPrint(APIResponse(data, response, error))
+        let response = APIResponse(data, response, error)
+        self?.log(request, response)
       }
     }
 
     task.resume()
+  }
+
+  private func log(_ request: URLRequest, _ response: APIResponse) {
+    guard loggingEnabled else { return }
+    print("URL: \(request.url ?? URL(string: "http://url_not_set.com")!)")
+    print("Method: \(request.httpMethod ?? "Not Set")")
+    print("Response: \(response)")
   }
 }

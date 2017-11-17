@@ -21,6 +21,8 @@ class FruitListingView: UIViewController, FruitListingUI {
     user.refresh()
   }
 
+  private let refreshControl = UIRefreshControl()
+
   private var data: [Fruit] = [Fruit]()
 
   init(_ presenter: FruitListingPresenter) {
@@ -51,6 +53,7 @@ class FruitListingView: UIViewController, FruitListingUI {
   }
 
   func updateListing(_ fruit: [Fruit]) {
+    refreshControl.endRefreshing()
     data = fruit
     tableView?.reloadData()
     tableView?.isHidden = false
@@ -87,9 +90,15 @@ extension FruitListingView: UITableViewDelegate, UITableViewDataSource {
     user.select(item)
   }
 
+  @objc func pulledToRefresh() {
+    user.refresh()
+  }
+
   private func tableViewSetup() {
+    refreshControl.addTarget(self, action: #selector(pulledToRefresh), for: .valueChanged)
     tableView?.register(UITableViewCell.self, forCellReuseIdentifier: "Fruit")
     tableView?.tableFooterView = UIView()
+    tableView?.addSubview(refreshControl)
   }
 }
 

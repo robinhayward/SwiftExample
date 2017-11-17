@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class FruitDetailAssembler {
-  class func assemble(with wireframe: FruitDetailWireframe, fruit: Fruit) -> UIViewController {
-    let interactor = FruitDetailInteractor(fruit)
+  class func assemble(with wireframe: FruitDetailWireframe, fruit: Fruit, usage: UsageReporter) -> UIViewController {
+    let interactor = FruitDetailInteractor(fruit, usage: usage)
     let presenter = FruitDetailPresenter(wireframe)
     let view = FruitDetailView(presenter)
 

@@ -13,12 +13,28 @@ class FruitDetailInteractor: FruitDetailInteractorInput {
   weak var output: FruitDetailInteractorOutput?
 
   let entity: Fruit
+  let usage: UsageReporter
 
-  init(_ entity: Fruit) {
+  init(_ entity: Fruit, usage: UsageReporter) {
     self.entity = entity
+    self.usage = usage
   }
 
   func welcome() {
+    report()
     output?.update(entity)
+  }
+
+  private func report() {
+    let event = UsageReport(
+      name: .display,
+      data: [
+        "screen": "fruit-detail",
+        "fruit-type": entity.type,
+        "fruit-node": "a node 1"
+      ]
+    )
+
+    usage.register(event)
   }
 }

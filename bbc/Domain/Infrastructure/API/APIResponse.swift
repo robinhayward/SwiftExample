@@ -8,13 +8,14 @@
 
 import Foundation
 
-struct APIResponse: CustomDebugStringConvertible {
+struct APIResponse: CustomStringConvertible {
   let data: Data?
   let response: URLResponse?
   let error: Error?
 
-  var debugDescription: String {
-    var info = ""
+  var description: String {
+    let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+    var info = "HTTP Status Code: \(statusCode)\n"
     if let data = data, let dataString = String(data: data, encoding: .utf8) {
       info = info + dataString
     }

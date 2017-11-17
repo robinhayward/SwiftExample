@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 class FruitListingAssembler {
-  class func assemble(with wireframe: FruitListingWireframe) -> UIViewController {
+  class func assemble(with wireframe: FruitListingWireframe, usage: UsageReporter = Usage()) -> UIViewController {
     let grocery = Grocery()
-    let interactor = FruitListingInteractor(grocery)
+    let interactor = FruitListingInteractor(grocery, usage: usage)
     let presenter = FruitListingPresenter(wireframe)
     let view = FruitListingView(presenter)
 

@@ -50,6 +50,6 @@ class AppRouterFactory {
   }
 
   func detail(wireframe: FruitDetailWireframe, fruit: Fruit) -> UIViewController {
-    return FruitDetailAssembler.assemble(with: wireframe, fruit: fruit)
+    return FruitDetailAssembler.assemble(with: wireframe, fruit: fruit, usage: Usage())
   }
 }

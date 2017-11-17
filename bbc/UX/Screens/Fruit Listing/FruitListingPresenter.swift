@@ -21,7 +21,7 @@ class FruitListingPresenter: FruitListingUser, FruitListingInteractorOutput {
   // MARK: FruitListingUserActor
 
   func arrived() {
-    refresh()
+    interactor?.userArrived()
   }
 
   func refresh() {

@@ -30,7 +30,6 @@
 		0B295D1F1FBC90F900898DA7 /* FruitListingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D181FBC90F900898DA7 /* FruitListingEntity.swift */; };
 		0B295D231FBC913B00898DA7 /* Grocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D221FBC913B00898DA7 /* Grocery.swift */; };
 		0B295D291FBC930400898DA7 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D281FBC930400898DA7 /* Result.swift */; };
-		0B295D2C1FBC961D00898DA7 /* CellBlueprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D2B1FBC961D00898DA7 /* CellBlueprint.swift */; };
 		0B295D351FBC99BB00898DA7 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D341FBC99BB00898DA7 /* AppRouter.swift */; };
 		0B295D381FBCA50F00898DA7 /* ThreadSwitching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D371FBCA50F00898DA7 /* ThreadSwitching.swift */; };
 		0B295D3B1FBCA63800898DA7 /* UsageReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D3A1FBCA63800898DA7 /* UsageReporting.swift */; };
@@ -76,7 +75,6 @@
 		0B295D181FBC90F900898DA7 /* FruitListingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitListingEntity.swift; sourceTree = "<group>"; };
 		0B295D221FBC913B00898DA7 /* Grocery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grocery.swift; sourceTree = "<group>"; };
 		0B295D281FBC930400898DA7 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		0B295D2B1FBC961D00898DA7 /* CellBlueprint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellBlueprint.swift; sourceTree = "<group>"; };
 		0B295D341FBC99BB00898DA7 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		0B295D371FBCA50F00898DA7 /* ThreadSwitching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSwitching.swift; sourceTree = "<group>"; };
 		0B295D3A1FBCA63800898DA7 /* UsageReporting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageReporting.swift; sourceTree = "<group>"; };
@@ -192,7 +190,6 @@
 		0B295D0E1FBC908F00898DA7 /* UX */ = {
 			isa = PBXGroup;
 			children = (
-				0B295D2A1FBC961300898DA7 /* _ */,
 				0B295D331FBC99A700898DA7 /* Routes */,
 				0B295D2D1FBC962700898DA7 /* Screens */,
 			);
@@ -217,14 +214,6 @@
 				0B295D281FBC930400898DA7 /* Result.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		0B295D2A1FBC961300898DA7 /* _ */ = {
-			isa = PBXGroup;
-			children = (
-				0B295D2B1FBC961D00898DA7 /* CellBlueprint.swift */,
-			);
-			path = _;
 			sourceTree = "<group>";
 		};
 		0B295D2D1FBC962700898DA7 /* Screens */ = {
@@ -372,7 +361,6 @@
 				0B295D1F1FBC90F900898DA7 /* FruitListingEntity.swift in Sources */,
 				0B295CFA1FBC8F4100898DA7 /* FruitDetailPresenter.swift in Sources */,
 				0B295D1B1FBC90F900898DA7 /* FruitListingProtocols.swift in Sources */,
-				0B295D2C1FBC961D00898DA7 /* CellBlueprint.swift in Sources */,
 				0B295D291FBC930400898DA7 /* Result.swift in Sources */,
 				0B5F8C311FBEDC700018A0B6 /* APIConfig.swift in Sources */,
 				0B295D191FBC90F900898DA7 /* FruitListingAssembler.swift in Sources */,

@@ -26,6 +26,7 @@ protocol FruitListingUI: class {
 }
 
 protocol FruitListingInteractorInput: class {
+  func userArrived()
   func refresh()
 }
 

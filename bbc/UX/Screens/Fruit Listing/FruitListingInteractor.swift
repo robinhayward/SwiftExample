@@ -13,9 +13,16 @@ class FruitListingInteractor: FruitListingInteractorInput {
   weak var output: FruitListingInteractorOutput?
 
   let service: GroceryAssistant
+  let usage: UsageReporter
 
-  init(_ service: GroceryAssistant) {
+  init(_ service: GroceryAssistant, usage: UsageReporter) {
     self.service = service
+    self.usage = usage
+  }
+
+  func userArrived() {
+    report()
+    refresh()
   }
 
   func refresh() {
@@ -27,5 +34,16 @@ class FruitListingInteractor: FruitListingInteractorInput {
         self?.output?.hasListingUpdate(error: error)
       }
     }
+  }
+
+  private func report() {
+    let event = UsageReport(
+      name: .display,
+      data: [
+        "screen": "fruit-listings"
+      ]
+    )
+
+    usage.register(event)
   }
 }
