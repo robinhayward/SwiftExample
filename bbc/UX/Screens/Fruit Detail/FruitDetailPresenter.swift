@@ -24,6 +24,10 @@ class FruitDetailPresenter: FruitDetailUser, FruitDetailInteractorOutput {
     interactor?.welcome()
   }
 
+  func done() {
+    wireframe.fruitDetailDone()
+  }
+
   // MARK: FruitDetailInteractorOutput
 
   func update(_ fruit: Fruit) {
@@ -34,7 +38,8 @@ class FruitDetailPresenter: FruitDetailUser, FruitDetailInteractorOutput {
       priceTitle: "Price",
       priceValue: view.formattedPrice,
       weightTitle: "Weight",
-      weightValue: view.formattedPrice
+      weightValue: view.formattedPrice,
+      doneButtonTitle: "DONE"
     )
     
     ui?.update(content)
@@ -48,4 +53,5 @@ struct FruitDetailViewContent {
   let priceValue: String
   let weightTitle: String
   let weightValue: String
+  let doneButtonTitle: String
 }

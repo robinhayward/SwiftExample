@@ -10,11 +10,12 @@ import Foundation
 import UIKit
 
 protocol FruitDetailWireframe: class {
-
+  func fruitDetailDone()
 }
 
 protocol FruitDetailUser: class {
   func arrive()
+  func done()
 }
 
 protocol FruitDetailUI: class {

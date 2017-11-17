@@ -27,6 +27,7 @@ class FruitListingView: UIViewController, FruitListingUI {
     self.presenter = presenter
     self.user = presenter
     super.init(nibName: nil, bundle: nil)
+    title = "Fruit"
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -63,10 +64,6 @@ class FruitListingView: UIViewController, FruitListingUI {
 // MARK: - Table View
 
 extension FruitListingView: UITableViewDelegate, UITableViewDataSource {
-  struct TableViewCells {
-    static let Fruit = CellBlueprint<FruitCell>("FruitCell", height: 100.0)
-  }
-
   func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
@@ -77,7 +74,7 @@ extension FruitListingView: UITableViewDelegate, UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let item = data[indexPath.row]
-    let cell = TableViewCells.Fruit.dequeue(with: tableView, for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: "Fruit", for: indexPath)
 
     FruitCellConfigurator.configure(cell, with: item)
 
@@ -91,7 +88,7 @@ extension FruitListingView: UITableViewDelegate, UITableViewDataSource {
   }
 
   private func tableViewSetup() {
-    TableViewCells.Fruit.register(with: tableView)
+    tableView?.register(UITableViewCell.self, forCellReuseIdentifier: "Fruit")
     tableView?.tableFooterView = UIView()
   }
 }
@@ -99,9 +96,9 @@ extension FruitListingView: UITableViewDelegate, UITableViewDataSource {
 //MARK: - Table View Cells
 
 class FruitCellConfigurator {
-  class func configure(_ cell: FruitCell, with fruit: Fruit) {
+  class func configure(_ cell: UITableViewCell, with fruit: Fruit) {
     let view = FruitViewModel(model: fruit)
-    cell.nameLabel?.text = view.displayName
+    cell.textLabel?.text = view.displayName
   }
 }
 

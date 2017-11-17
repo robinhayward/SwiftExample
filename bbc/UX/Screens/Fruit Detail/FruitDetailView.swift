@@ -18,7 +18,11 @@ class FruitDetailView: UIViewController, FruitDetailUI {
   @IBOutlet weak var priceValueLabel: UILabel?
   @IBOutlet weak var weightLabel: UILabel?
   @IBOutlet weak var weightValueLabel: UILabel?
-
+  @IBOutlet weak var doneButton: UIButton?
+  @IBAction func doneButtonAction() {
+    user.done()
+  }
+  
   init(_ presenter: FruitDetailPresenter) {
     self.presenter = presenter
     self.user = presenter
@@ -39,5 +43,10 @@ class FruitDetailView: UIViewController, FruitDetailUI {
   func update(_ content: FruitDetailViewContent) {
     title = content.title
     typeLabel?.text = content.fruitName
+    priceLabel?.text = content.priceTitle
+    priceValueLabel?.text = content.priceValue
+    weightLabel?.text = content.weightTitle
+    weightValueLabel?.text = content.weightValue
+    doneButton?.setTitle(content.doneButtonTitle, for: .normal)
   }
 }

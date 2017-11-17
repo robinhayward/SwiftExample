@@ -32,12 +32,14 @@ extension AppRouter: FruitListingWireframe {
   func fruitListingSelected(_ fruit: Fruit) {
     let view = factory.detail(wireframe: self, fruit: fruit)
 
-    root?.pushViewController(view, animated: true)
+    root?.present(view, animated: true)
   }
 }
 
 extension AppRouter: FruitDetailWireframe {
-
+  func fruitDetailDone() {
+    root?.dismiss(animated: true)
+  }
 }
 
 // MARK: - Factory
