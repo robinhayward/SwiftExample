@@ -21,6 +21,8 @@ protocol FruitListingUser: class {
 
 protocol FruitListingUI: class {
   func loading()
+  func finishLoading()
+  func noFruitAvailable()
   func updateListing(_ fruit: [Fruit])
   func updateListingFailure(_ error: GroceryError)
 }

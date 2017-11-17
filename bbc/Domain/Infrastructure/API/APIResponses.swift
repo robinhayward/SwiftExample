@@ -26,8 +26,6 @@ class FruitResponse {
     catch {
       return GroceryResult(.badDataReceived)
     }
-
-    return GroceryResult(.unknown)
   }
 }
 

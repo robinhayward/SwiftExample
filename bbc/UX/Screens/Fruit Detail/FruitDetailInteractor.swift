@@ -30,8 +30,7 @@ class FruitDetailInteractor: FruitDetailInteractorInput {
       name: .display,
       data: [
         "screen": "fruit-detail",
-        "fruit-type": entity.type,
-        "fruit-node": "a node 1"
+        "fruit-type": entity.type
       ]
     )
 

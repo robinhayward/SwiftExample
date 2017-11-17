@@ -10,8 +10,7 @@ import Foundation
 import UIKit
 
 class FruitListingAssembler {
-  class func assemble(with wireframe: FruitListingWireframe, usage: UsageReporter = Usage()) -> UIViewController {
-    let grocery = Grocery()
+  class func assemble(wireframe: FruitListingWireframe, grocery: GroceryAssistant = Grocery(), usage: UsageReporter = Usage()) -> UIViewController {
     let interactor = FruitListingInteractor(grocery, usage: usage)
     let presenter = FruitListingPresenter(wireframe)
     let view = FruitListingView(presenter)
@@ -25,7 +24,7 @@ class FruitListingAssembler {
   }
 
   class func assembleWithinNavigationController(with wireframe: FruitListingWireframe) -> UINavigationController {
-    let view = assemble(with: wireframe)
+    let view = assemble(wireframe: wireframe)
 
     return UINavigationController(rootViewController: view)
   }

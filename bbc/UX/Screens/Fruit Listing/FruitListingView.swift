@@ -23,7 +23,7 @@ class FruitListingView: UIViewController, FruitListingUI {
 
   private let refreshControl = UIRefreshControl()
 
-  private var data: [Fruit] = [Fruit]()
+  internal var data: [Fruit] = [Fruit]()
 
   init(_ presenter: FruitListingPresenter) {
     self.presenter = presenter
@@ -55,14 +55,25 @@ class FruitListingView: UIViewController, FruitListingUI {
     activityButton?.isHidden = true
   }
 
-  func updateListing(_ fruit: [Fruit]) {
-    refreshControl.endRefreshing()
-    data = fruit
-    tableView?.reloadData()
+  func finishLoading() {
     tableView?.isHidden = false
     activityButton?.isHidden = true
     activityLabel?.isHidden = true
     activityIndicator?.stopAnimating()
+  }
+
+  func noFruitAvailable() {
+    tableView?.isHidden = true
+    activityLabel?.text = "No fruit available"
+    activityIndicator?.stopAnimating()
+    activityButton?.setTitle("Reload", for: .normal)
+    activityButton?.isHidden = false
+  }
+
+  func updateListing(_ fruit: [Fruit]) {
+    refreshControl.endRefreshing()
+    data = fruit
+    tableView?.reloadData()
   }
 
   func updateListingFailure(_ error: GroceryError) {

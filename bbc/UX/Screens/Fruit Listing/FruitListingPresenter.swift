@@ -37,10 +37,12 @@ class FruitListingPresenter: FruitListingUser, FruitListingInteractorOutput {
   // MARK: FruitListingInteractorOutput
 
   func hasListingUpdate(fruit: [Fruit]) {
-    ui?.updateListing(fruit)
+    ui?.finishLoading()
+    fruit.count > 0 ? ui?.updateListing(fruit) : ui?.noFruitAvailable()
   }
 
   func hasListingUpdate(error: GroceryError) {
-    
+    ui?.finishLoading()
+    ui?.updateListingFailure(error)
   }
 }

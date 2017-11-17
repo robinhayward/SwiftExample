@@ -38,7 +38,7 @@ class FruitDetailPresenter: FruitDetailUser, FruitDetailInteractorOutput {
       priceTitle: "Price",
       priceValue: view.formattedPrice,
       weightTitle: "Weight",
-      weightValue: view.formattedPrice,
+      weightValue: view.formattedWeight,
       doneButtonTitle: "DONE"
     )
     
