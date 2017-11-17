@@ -13,3 +13,11 @@ struct Fruit: Codable {
   let price: Int
   let weight: Int
 }
+
+struct FruitViewModel {
+  let model: Fruit
+
+  var displayName: String { return model.type.capitalized }
+  var formattedPrice: String { return "\(model.price)" }
+  var formattedWeight: String { return "\(model.weight)" }
+}

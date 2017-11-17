@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B0A7DAB1FBED0C400293ED2 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0A7DAA1FBED0C400293ED2 /* APIResponse.swift */; };
+		0B0A7DAD1FBED0F400293ED2 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0A7DAC1FBED0F400293ED2 /* API.swift */; };
+		0B0A7DAF1FBED22400293ED2 /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0A7DAE1FBED22400293ED2 /* APIErrors.swift */; };
 		0B295CD11FBC8EF700898DA7 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295CD01FBC8EF700898DA7 /* App.swift */; };
 		0B295CD81FBC8EF700898DA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B295CD71FBC8EF700898DA7 /* Assets.xcassets */; };
 		0B295CDB1FBC8EF700898DA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B295CD91FBC8EF700898DA7 /* LaunchScreen.storyboard */; };
@@ -31,8 +34,8 @@
 		0B295D301FBC994400898DA7 /* FruitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B295D2F1FBC994400898DA7 /* FruitCell.xib */; };
 		0B295D321FBC994E00898DA7 /* FruitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D311FBC994E00898DA7 /* FruitCell.swift */; };
 		0B295D351FBC99BB00898DA7 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D341FBC99BB00898DA7 /* AppRouter.swift */; };
-		0B295D381FBCA50F00898DA7 /* Threads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D371FBCA50F00898DA7 /* Threads.swift */; };
-		0B295D3B1FBCA63800898DA7 /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D3A1FBCA63800898DA7 /* Usage.swift */; };
+		0B295D381FBCA50F00898DA7 /* ThreadSwitching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D371FBCA50F00898DA7 /* ThreadSwitching.swift */; };
+		0B295D3B1FBCA63800898DA7 /* UsageReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D3A1FBCA63800898DA7 /* UsageReporting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B0A7DAA1FBED0C400293ED2 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		0B0A7DAC1FBED0F400293ED2 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		0B0A7DAE1FBED22400293ED2 /* APIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrors.swift; sourceTree = "<group>"; };
 		0B295CCD1FBC8EF700898DA7 /* bbc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bbc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B295CD01FBC8EF700898DA7 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		0B295CD71FBC8EF700898DA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -74,8 +80,8 @@
 		0B295D2F1FBC994400898DA7 /* FruitCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FruitCell.xib; sourceTree = "<group>"; };
 		0B295D311FBC994E00898DA7 /* FruitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitCell.swift; sourceTree = "<group>"; };
 		0B295D341FBC99BB00898DA7 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
-		0B295D371FBCA50F00898DA7 /* Threads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Threads.swift; sourceTree = "<group>"; };
-		0B295D3A1FBCA63800898DA7 /* Usage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usage.swift; sourceTree = "<group>"; };
+		0B295D371FBCA50F00898DA7 /* ThreadSwitching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSwitching.swift; sourceTree = "<group>"; };
+		0B295D3A1FBCA63800898DA7 /* UsageReporting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageReporting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +102,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B0A7DA81FBED09600293ED2 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				0B0A7DA91FBED0B500293ED2 /* API */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		0B0A7DA91FBED0B500293ED2 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				0B0A7DAC1FBED0F400293ED2 /* API.swift */,
+				0B0A7DAE1FBED22400293ED2 /* APIErrors.swift */,
+				0B0A7DAA1FBED0C400293ED2 /* APIResponse.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		0B295CC41FBC8EF700898DA7 = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +201,7 @@
 		0B295D0F1FBC909400898DA7 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				0B0A7DA81FBED09600293ED2 /* Infrastructure */,
 				0B295D391FBCA62A00898DA7 /* Services */,
 				0B295D361FBCA50400898DA7 /* Helpers */,
 				0B295D211FBC912000898DA7 /* Repositories */,
@@ -239,7 +264,7 @@
 		0B295D361FBCA50400898DA7 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				0B295D371FBCA50F00898DA7 /* Threads.swift */,
+				0B295D371FBCA50F00898DA7 /* ThreadSwitching.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -247,7 +272,7 @@
 		0B295D391FBCA62A00898DA7 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				0B295D3A1FBCA63800898DA7 /* Usage.swift */,
+				0B295D3A1FBCA63800898DA7 /* UsageReporting.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -368,10 +393,13 @@
 				0B295D291FBC930400898DA7 /* Result.swift in Sources */,
 				0B295D191FBC90F900898DA7 /* FruitListingAssembler.swift in Sources */,
 				0B295CFC1FBC8F4100898DA7 /* FruitDetailInteractor.swift in Sources */,
-				0B295D3B1FBCA63800898DA7 /* Usage.swift in Sources */,
-				0B295D381FBCA50F00898DA7 /* Threads.swift in Sources */,
+				0B0A7DAB1FBED0C400293ED2 /* APIResponse.swift in Sources */,
+				0B295D3B1FBCA63800898DA7 /* UsageReporting.swift in Sources */,
+				0B295D381FBCA50F00898DA7 /* ThreadSwitching.swift in Sources */,
 				0B295D321FBC994E00898DA7 /* FruitCell.swift in Sources */,
+				0B0A7DAD1FBED0F400293ED2 /* API.swift in Sources */,
 				0B295CFF1FBC8F4100898DA7 /* FruitDetailEntity.swift in Sources */,
+				0B0A7DAF1FBED22400293ED2 /* APIErrors.swift in Sources */,
 				0B295D1C1FBC90F900898DA7 /* FruitListingInteractor.swift in Sources */,
 				0B295D111FBC90A200898DA7 /* Fruit.swift in Sources */,
 				0B295CF91FBC8F4100898DA7 /* FruitDetailAssembler.swift in Sources */,

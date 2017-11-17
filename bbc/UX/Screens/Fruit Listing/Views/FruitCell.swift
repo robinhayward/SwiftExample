@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 class FruitCell: UITableViewCell {
-  @IBOutlet weak var mainImageView: UIImageView?
   @IBOutlet weak var nameLabel: UILabel?
 
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

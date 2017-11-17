@@ -13,6 +13,12 @@ class FruitDetailView: UIViewController, FruitDetailUI {
   let presenter: FruitDetailPresenter
   let user: FruitDetailUser
 
+  @IBOutlet weak var typeLabel: UILabel?
+  @IBOutlet weak var priceLabel: UILabel?
+  @IBOutlet weak var priceValueLabel: UILabel?
+  @IBOutlet weak var weightLabel: UILabel?
+  @IBOutlet weak var weightValueLabel: UILabel?
+
   init(_ presenter: FruitDetailPresenter) {
     self.presenter = presenter
     self.user = presenter
@@ -30,7 +36,8 @@ class FruitDetailView: UIViewController, FruitDetailUI {
 
   // MARK: FruitDetailUI
 
-  func update(_ fruit: Fruit) {
-    title = fruit.type
+  func update(_ content: FruitDetailViewContent) {
+    title = content.title
+    typeLabel?.text = content.fruitName
   }
 }

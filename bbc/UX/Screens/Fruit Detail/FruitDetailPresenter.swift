@@ -27,6 +27,25 @@ class FruitDetailPresenter: FruitDetailUser, FruitDetailInteractorOutput {
   // MARK: FruitDetailInteractorOutput
 
   func update(_ fruit: Fruit) {
-    ui?.update(fruit)
+    let view = FruitViewModel(model: fruit)
+    let content = FruitDetailViewContent(
+      title: view.displayName,
+      fruitName: view.displayName,
+      priceTitle: "Price",
+      priceValue: view.formattedPrice,
+      weightTitle: "Weight",
+      weightValue: view.formattedPrice
+    )
+    
+    ui?.update(content)
   }
+}
+
+struct FruitDetailViewContent {
+  let title: String
+  let fruitName: String
+  let priceTitle: String
+  let priceValue: String
+  let weightTitle: String
+  let weightValue: String
 }

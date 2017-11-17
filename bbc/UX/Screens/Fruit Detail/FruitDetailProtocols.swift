@@ -18,7 +18,7 @@ protocol FruitDetailUser: class {
 }
 
 protocol FruitDetailUI: class {
-  func update(_ fruit: Fruit)
+  func update(_ content: FruitDetailViewContent)
 }
 
 protocol FruitDetailInteractorInput: class {
