@@ -50,6 +50,9 @@ class FruitListingView: UIViewController, FruitListingUI {
 
   func loading() {
     tableView?.isHidden = true
+    activityLabel?.text = "Loading"
+    activityIndicator?.startAnimating()
+    activityButton?.isHidden = true
   }
 
   func updateListing(_ fruit: [Fruit]) {
@@ -57,10 +60,17 @@ class FruitListingView: UIViewController, FruitListingUI {
     data = fruit
     tableView?.reloadData()
     tableView?.isHidden = false
+    activityButton?.isHidden = true
+    activityLabel?.isHidden = true
+    activityIndicator?.stopAnimating()
   }
 
   func updateListingFailure(_ error: GroceryError) {
     tableView?.isHidden = true
+    activityLabel?.text = "Oh no, something went wrong"
+    activityButton?.setTitle("Retry", for: .normal)
+    activityButton?.isHidden = false
+    activityIndicator?.stopAnimating()
   }
 }
 

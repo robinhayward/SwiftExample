@@ -10,6 +10,7 @@ import Foundation
 
 class API {
   static let shared: API = API(config: APIConfig(), session: URLSession.shared)
+
   let config: APIConfig
   let session: URLSession
 
