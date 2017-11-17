@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 
 enum GroceryError: Error {
-  case unknown, connection, server, data
+  case unknown
+  case badDataReceived
+  case requestFailed // TODO.. add more granular error reporting
 }
 
 typealias GroceryResult = Result<[Fruit], GroceryError>
@@ -20,40 +22,20 @@ protocol GroceryAssistant {
 }
 
 class Grocery: GroceryAssistant {
-  let api: APIInterface
+  let api: API
 
-  init(api: APIInterface = API()) {
+  init(api: API = API.shared) {
     self.api = api
   }
 
   func fruit(completion: @escaping (GroceryResult) -> ()) {
-    api.fruit { (response) in
-      completion(FruitResponseHandler.handle(response))
+    guard let request = FruitRequest(config: api.config).create() else {
+      completion(GroceryResult(.unknown))
+      return
     }
-  }
-}
-
-class FruitResponseHandler {
-  private struct FruitPage: Codable {
-    let fruit: [Fruit]
-  }
-  
-  class func handle(_ input: APIResponse) -> GroceryResult {
-    if let _ = input.error {
-      return GroceryResult(.server)
+    
+    api.run(request) { response in
+      completion(FruitResponse.handle(response))
     }
-
-    if let data = input.data {
-      do {
-        let jsonDecoder = JSONDecoder()
-        let page = try jsonDecoder.decode(FruitPage.self, from: data)
-        return GroceryResult(page.fruit)
-      }
-      catch {
-        return GroceryResult(.data)
-      }
-    }
-
-    return GroceryResult(.unknown)
   }
 }

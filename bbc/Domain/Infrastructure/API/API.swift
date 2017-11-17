@@ -8,60 +8,53 @@
 
 import Foundation
 
-protocol APIInterface {
-  func fruit(completion: @escaping (APIResponse) -> ())
-  func send(_ report: UsageReport)
-}
-
-class API: APIInterface {
+class API {
+  static let shared: API = API(config: APIConfig(), session: URLSession.shared)
   let config: APIConfig
   let session: URLSession
 
-  private let loggingEnabled = true
+  let log: Log = Log(enabled: true)
 
-  init(config: APIConfig = APIConfig(), session: URLSession = URLSession.shared) {
+  init(config: APIConfig, session: URLSession) {
     self.config = config
     self.session = session
   }
 
-  func fruit(completion: @escaping (APIResponse) -> ()) {
-    let url = URL(string: "\(config.host)/data.json")!
-    let request = URLRequest(url: url)
+  func run(_ request: URLRequest, _ completion: @escaping ((APIResponse) -> ())) {
+    log.request(request)
+    let sent = Date.timeIntervalSinceReferenceDate
     let task = session.dataTask(with: request) { [weak self] (data, response, error) in
-      SwitchToMainThread.with {
-        let response = APIResponse(data, response, error)
-        self?.log(request, response)
-        completion(response)
-      }
+      let duration = Date.timeIntervalSinceReferenceDate - sent
+      let result = APIResponse(data, response, error, duration)
+      self?.handle(result, with: completion)
     }
 
     task.resume()
   }
 
-  func send(_ report: UsageReport) {
-    let resource = "\(config.host)/stats"
+  // MARK: - Private
 
-    guard
-      let request = UsageReportUrlRequest(report, resource).create()
-    else {
-      debugPrint("Failed to register usage report for: \(report)")
-      return
+  private func handle(_ response: APIResponse, with completion: @escaping ((APIResponse) -> ())) {
+    log.response(response)
+    SwitchToMainThread.with {
+      completion(response)
     }
-
-    let task = session.dataTask(with: request) { [weak self] (data, response, error) in
-      SwitchToMainThread.with {
-        let response = APIResponse(data, response, error)
-        self?.log(request, response)
-      }
-    }
-
-    task.resume()
   }
+}
 
-  private func log(_ request: URLRequest, _ response: APIResponse) {
-    guard loggingEnabled else { return }
-    print("URL: \(request.url ?? URL(string: "http://url_not_set.com")!)")
-    print("Method: \(request.httpMethod ?? "Not Set")")
-    print("Response: \(response)")
+extension API {
+  struct Log {
+    var enabled: Bool
+
+    func request(_ request: URLRequest) {
+      guard enabled else { return }
+      print("URL: \(request.url ?? URL(string: "http://url_not_set.com")!)")
+      print("Method: \(request.httpMethod ?? "Not Set")")
+    }
+
+    func response(_ response: APIResponse) {
+      guard enabled else { return }
+      print("Response: \(response)")
+    }
   }
 }

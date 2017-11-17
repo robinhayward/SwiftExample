@@ -35,6 +35,6 @@ class FruitDetailInteractor: FruitDetailInteractorInput {
       ]
     )
 
-    usage.register(event)
+    usage.register(event, completion: nil)
   }
 }

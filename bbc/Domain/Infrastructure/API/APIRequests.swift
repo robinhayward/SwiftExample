@@ -1,5 +1,5 @@
 //
-//  APIHelpers.swift
+//  APIRequests.swift
 //  bbc
 //
 //  Created by Robin Hayward on 17/11/2017.
@@ -8,15 +8,28 @@
 
 import Foundation
 
-class UsageReportUrlRequest {
-  let report: UsageReport
-  let resource: String
+struct FruitRequest {
+  let config: APIConfig
 
-  init(_ report: UsageReport, _ resource: String) {
-    self.report = report
-    self.resource = resource
+  private let resource = "/data.json"
+
+  func create() -> URLRequest? {
+    guard let url = URL(string: "\(config.host)\(resource)") else {
+      return nil
+    }
+    let request = NSMutableURLRequest(url: url)
+    request.httpMethod = "GET"
+
+    return request as URLRequest
   }
-  
+}
+
+struct UsageReportRequest {
+  let config: APIConfig
+  let report: UsageReport
+
+  private let resource = "stats"
+
   func create() -> URLRequest? {
     guard let url = url() else { return nil }
 

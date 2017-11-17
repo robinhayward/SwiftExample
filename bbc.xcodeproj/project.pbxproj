@@ -34,7 +34,8 @@
 		0B295D381FBCA50F00898DA7 /* ThreadSwitching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D371FBCA50F00898DA7 /* ThreadSwitching.swift */; };
 		0B295D3B1FBCA63800898DA7 /* UsageReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B295D3A1FBCA63800898DA7 /* UsageReporting.swift */; };
 		0B5F8C311FBEDC700018A0B6 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5F8C301FBEDC700018A0B6 /* APIConfig.swift */; };
-		0B5F8C341FBEDC980018A0B6 /* APIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5F8C331FBEDC980018A0B6 /* APIHelpers.swift */; };
+		0B6BF68C1FBF129100245157 /* APIResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BF68B1FBF129100245157 /* APIResponses.swift */; };
+		0B6BF68E1FBF140200245157 /* APIRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BF68D1FBF140200245157 /* APIRequests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +80,8 @@
 		0B295D371FBCA50F00898DA7 /* ThreadSwitching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSwitching.swift; sourceTree = "<group>"; };
 		0B295D3A1FBCA63800898DA7 /* UsageReporting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageReporting.swift; sourceTree = "<group>"; };
 		0B5F8C301FBEDC700018A0B6 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
-		0B5F8C331FBEDC980018A0B6 /* APIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHelpers.swift; sourceTree = "<group>"; };
+		0B6BF68B1FBF129100245157 /* APIResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponses.swift; sourceTree = "<group>"; };
+		0B6BF68D1FBF140200245157 /* APIRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +117,8 @@
 				0B5F8C301FBEDC700018A0B6 /* APIConfig.swift */,
 				0B0A7DAE1FBED22400293ED2 /* APIErrors.swift */,
 				0B0A7DAA1FBED0C400293ED2 /* APIResponse.swift */,
-				0B5F8C331FBEDC980018A0B6 /* APIHelpers.swift */,
+				0B6BF68D1FBF140200245157 /* APIRequests.swift */,
+				0B6BF68B1FBF129100245157 /* APIResponses.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -369,6 +372,8 @@
 				0B295D3B1FBCA63800898DA7 /* UsageReporting.swift in Sources */,
 				0B295D381FBCA50F00898DA7 /* ThreadSwitching.swift in Sources */,
 				0B0A7DAD1FBED0F400293ED2 /* API.swift in Sources */,
+				0B6BF68C1FBF129100245157 /* APIResponses.swift in Sources */,
+				0B6BF68E1FBF140200245157 /* APIRequests.swift in Sources */,
 				0B295CFF1FBC8F4100898DA7 /* FruitDetailEntity.swift in Sources */,
 				0B0A7DAF1FBED22400293ED2 /* APIErrors.swift in Sources */,
 				0B295D1C1FBC90F900898DA7 /* FruitListingInteractor.swift in Sources */,
@@ -376,7 +381,6 @@
 				0B295CF91FBC8F4100898DA7 /* FruitDetailAssembler.swift in Sources */,
 				0B295CD11FBC8EF700898DA7 /* App.swift in Sources */,
 				0B295CFD1FBC8F4100898DA7 /* FruitDetailView.swift in Sources */,
-				0B5F8C341FBEDC980018A0B6 /* APIHelpers.swift in Sources */,
 				0B295CFB1FBC8F4100898DA7 /* FruitDetailProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
