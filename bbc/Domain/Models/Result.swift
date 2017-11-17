@@ -19,4 +19,22 @@ enum Result<T, U> {
   init(_ error: U) {
     self = .failure(error)
   }
+
+  func successful() -> Bool {
+    switch self {
+    case .success(_):
+      return true
+    default:
+      return false
+    }
+  }
+
+  func error() -> U? {
+    switch self {
+    case .failure(let error):
+      return error
+    default:
+      return nil
+    }
+  }
 }

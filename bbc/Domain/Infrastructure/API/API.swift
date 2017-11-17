@@ -8,7 +8,13 @@
 
 import Foundation
 
-class API {
+protocol APIInterface {
+  var config: APIConfig { get }
+  
+  func run(_ request: URLRequest, _ completion: @escaping ((APIResponse) -> ()))
+}
+
+class API: APIInterface {
   static let shared: API = API(config: APIConfig(), session: URLSession.shared)
 
   let config: APIConfig

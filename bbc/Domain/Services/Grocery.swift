@@ -22,9 +22,9 @@ protocol GroceryAssistant {
 }
 
 class Grocery: GroceryAssistant {
-  let api: API
+  let api: APIInterface
 
-  init(api: API = API.shared) {
+  init(api: APIInterface = API.shared) {
     self.api = api
   }
 
