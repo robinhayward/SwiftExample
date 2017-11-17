@@ -10,12 +10,11 @@ import Foundation
 
 @testable import bbc
 
-class APIInterfaceFake: APIInterface {
-  let config: APIConfig = APIConfig()
+class NetworkFake: NetworkInterface {
   var request: URLRequest?
-  var completion: ((APIResponse) -> ())?
+  var completion: ((NetworkResponse) -> ())?
 
-  func run(_ request: URLRequest, _ completion: @escaping ((APIResponse) -> ())) {
+  func run(_ request: URLRequest, _ completion: @escaping ((NetworkResponse) -> ())) {
     self.request = request
     self.completion = completion
   }

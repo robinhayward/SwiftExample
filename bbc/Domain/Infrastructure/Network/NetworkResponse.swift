@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct APIResponse: CustomStringConvertible {
+struct NetworkResponse: CustomStringConvertible {
   let data: Data?
   let response: URLResponse?
   let error: Error?

@@ -15,11 +15,13 @@ import Nimble
 class GrocerySpec: QuickSpec {
   override func spec() {
     var sut: Grocery!
-    var api: APIInterfaceFake!
+    var api: API!
+    var network: NetworkFake!
 
     describe("Grocery") {
       beforeEach {
-        api = APIInterfaceFake()
+        network = NetworkFake()
+        api = API(network: network)
         sut = Grocery(api: api)
       }
 
@@ -28,9 +30,9 @@ class GrocerySpec: QuickSpec {
           sut.fruit { r in }
         }
         it("sends a valid url request to the api") {
-          expect(api.request).toNot(beNil())
-          expect(api.request?.url?.absoluteString).to(equal("https://raw.githubusercontent.com/fmtvp/recruit-test-data/master/data.json"))
-          expect(api.request?.httpMethod).to(equal("GET"))
+          expect(network.request).toNot(beNil())
+          expect(network.request?.url?.absoluteString).to(equal("https://raw.githubusercontent.com/fmtvp/recruit-test-data/master/data.json"))
+          expect(network.request?.httpMethod).to(equal("GET"))
         }
       }
 
@@ -42,7 +44,7 @@ class GrocerySpec: QuickSpec {
             sut.fruit { r in
               result = r
             }
-            api.completion?(NetworkResponseFactory.fruit())
+            network.completion?(NetworkResponseFactory.fruit())
           }
           it("has a success result with fruit") {
             expect(result).toNot(beNil())
@@ -58,7 +60,7 @@ class GrocerySpec: QuickSpec {
               sut.fruit { r in
                 result = r
               }
-              api.completion?(NetworkResponseFactory.serverError())
+              network.completion?(NetworkResponseFactory.serverError())
             }
             it("has a failure result with an error") {
               expect(result).toNot(beNil())
@@ -74,7 +76,7 @@ class GrocerySpec: QuickSpec {
               sut.fruit { r in
                 result = r
               }
-              api.completion?(NetworkResponseFactory.badFruit())
+              network.completion?(NetworkResponseFactory.badFruit())
             }
             it("has a failure result with an error") {
               expect(result).toNot(beNil())

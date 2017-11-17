@@ -29,13 +29,6 @@ class Grocery: GroceryAssistant {
   }
 
   func fruit(completion: @escaping (GroceryResult) -> ()) {
-    guard let request = FruitRequest(config: api.config).create() else {
-      completion(GroceryResult(.unknown))
-      return
-    }
-    
-    api.run(request) { response in
-      completion(FruitResponse.handle(response))
-    }
+    api.fruit(completion)
   }
 }

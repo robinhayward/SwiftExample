@@ -13,7 +13,7 @@ class FruitResponse {
     let fruit: [Fruit]
   }
 
-  class func handle(_ input: APIResponse) -> GroceryResult {
+  class func handle(_ input: NetworkResponse) -> GroceryResult {
     guard input.error == nil else { return GroceryResult(.requestFailed) }
     guard input.statusCode == 200 else { return GroceryResult(.requestFailed) }
     guard let data = input.data else { return GroceryResult(.requestFailed) }
@@ -26,18 +26,5 @@ class FruitResponse {
     catch {
       return GroceryResult(.badDataReceived)
     }
-  }
-}
-
-class UsageReportResponse {
-  private struct FruitPage: Codable {
-    let fruit: [Fruit]
-  }
-
-  class func handle(_ input: APIResponse) -> UsageReportError? {
-    guard input.error == nil else { return .requestFailed }
-    guard input.statusCode == 200 else { return .requestFailed }
-
-    return nil
   }
 }

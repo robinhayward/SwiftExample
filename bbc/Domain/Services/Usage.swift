@@ -34,13 +34,6 @@ class Usage: UsageReporter {
   }
 
   func register(_ report: UsageReport, completion: ((UsageReportError?) -> ())?) {
-    guard let request = UsageReportRequest(config: api.config, report: report).create() else {
-      completion?(UsageReportError.badRequestData)
-      return
-    }
-
-    api.run(request) { response in
-      completion?(UsageReportResponse.handle(response))
-    }
+    api.send(report, completion)
   }
 }

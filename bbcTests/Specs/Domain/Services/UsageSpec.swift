@@ -15,11 +15,13 @@ import Nimble
 class UsageSpec: QuickSpec {
   override func spec() {
     var sut: UsageReporter!
-    var api: APIInterfaceFake!
+    var api: API!
+    var network: NetworkFake!
 
     describe("Usage") {
       beforeEach {
-        api = APIInterfaceFake()
+        network = NetworkFake()
+        api = API(network: network)
         sut = Usage(api: api)
       }
 
@@ -30,9 +32,9 @@ class UsageSpec: QuickSpec {
           sut.register(report) { e in }
         }
         it("sends a valid url request to the api") {
-          expect(api.request).toNot(beNil())
-          expect(api.request?.url?.absoluteString).to(equal("https://raw.githubusercontent.com/fmtvp/recruit-test-data/master/stats?event=display&fruit-type=apple"))
-          expect(api.request?.httpMethod).to(equal("GET"))
+          expect(network.request).toNot(beNil())
+          expect(network.request?.url?.absoluteString).to(equal("https://raw.githubusercontent.com/fmtvp/recruit-test-data/master/stats?event=display&fruit-type=apple"))
+          expect(network.request?.httpMethod).to(equal("GET"))
         }
       }
 
@@ -45,7 +47,7 @@ class UsageSpec: QuickSpec {
             sut.register(report) { e in
               error = e
             }
-            api.completion?(NetworkResponseFactory.statusTwoHundredNoDataExpected())
+            network.completion?(NetworkResponseFactory.statusTwoHundredNoDataExpected())
           }
           it("fires the completion block without an error") {
             expect(error).to(beNil())
@@ -61,7 +63,7 @@ class UsageSpec: QuickSpec {
               sut.register(report) { e in
                 error = e
               }
-              api.completion?(NetworkResponseFactory.serverError())
+              network.completion?(NetworkResponseFactory.serverError())
             }
             it("fires the completion block without an error") {
               expect(error).to(equal(UsageReportError.requestFailed))

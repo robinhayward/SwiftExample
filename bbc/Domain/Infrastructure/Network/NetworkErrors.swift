@@ -8,6 +8,6 @@
 
 import Foundation
 
-enum APIError: Error {
+enum NetworkError: Error {
   case unknown
 }

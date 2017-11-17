@@ -9,59 +9,40 @@
 import Foundation
 
 protocol APIInterface {
-  var config: APIConfig { get }
-  
-  func run(_ request: URLRequest, _ completion: @escaping ((APIResponse) -> ()))
+  func fruit(_ completion: @escaping ((GroceryResult) -> ()))
+  func send(_ report: UsageReport, _ completion: ((UsageReportError?) -> ())?)
 }
 
 class API: APIInterface {
-  static let shared: API = API(config: APIConfig(), session: URLSession.shared)
-
+  static let shared = API(network: Network.shared)
+  
   let config: APIConfig
-  let session: URLSession
+  let network: NetworkInterface
 
-  let log: Log = Log(enabled: true)
-
-  init(config: APIConfig, session: URLSession) {
+  init(network: NetworkInterface, config: APIConfig = APIConfig()) {
+    self.network = network
     self.config = config
-    self.session = session
   }
 
-  func run(_ request: URLRequest, _ completion: @escaping ((APIResponse) -> ())) {
-    log.request(request)
-    let sent = Date.timeIntervalSinceReferenceDate
-    let task = session.dataTask(with: request) { [weak self] (data, response, error) in
-      let duration = Date.timeIntervalSinceReferenceDate - sent
-      let result = APIResponse(data, response, error, duration)
-      self?.handle(result, with: completion)
+  func fruit(_ completion: @escaping ((GroceryResult) -> ())) {
+    guard let request = FruitRequest(config: config).create() else {
+      completion(GroceryResult(.unknown))
+      return
     }
 
-    task.resume()
-  }
-
-  // MARK: - Private
-
-  private func handle(_ response: APIResponse, with completion: @escaping ((APIResponse) -> ())) {
-    log.response(response)
-    SwitchToMainThread.with {
-      completion(response)
+    network.run(request) { response in
+      completion(FruitResponse.handle(response))
     }
   }
-}
 
-extension API {
-  struct Log {
-    var enabled: Bool
-
-    func request(_ request: URLRequest) {
-      guard enabled else { return }
-      print("URL: \(request.url ?? URL(string: "http://url_not_set.com")!)")
-      print("Method: \(request.httpMethod ?? "Not Set")")
+  func send(_ report: UsageReport, _ completion: ((UsageReportError?) -> ())?) {
+    guard let request = UsageReportRequest(config: config, report: report).create() else {
+      completion?(UsageReportError.badRequestData)
+      return
     }
 
-    func response(_ response: APIResponse) {
-      guard enabled else { return }
-      print("Response: \(response)")
+    network.run(request) { response in
+      completion?(UsageReportResponse.handle(response))
     }
   }
 }
