@@ -8,12 +8,9 @@
 
 import Foundation
 
-struct APIConfig {
-  let host: String = "https://raw.githubusercontent.com/fmtvp/recruit-test-data/master"
-}
-
 protocol APIInterface {
   func fruit(completion: @escaping (APIResponse) -> ())
+  func send(_ report: UsageReport)
 }
 
 class API: APIInterface {
@@ -31,6 +28,19 @@ class API: APIInterface {
     let task = session.dataTask(with: request) { (data, response, error) in
       SwitchToMainThread.with {
         completion(APIResponse(data, response, error))
+      }
+    }
+
+    task.resume()
+  }
+
+  func send(_ report: UsageReport) {
+    let resource = "\(config.host)/stats"
+    let url = UsageReportUrl.create(resource: resource, report: report)
+    let request = URLRequest(url: url)
+    let task = session.dataTask(with: request) { (data, response, error) in
+      SwitchToMainThread.with {
+        debugPrint(APIResponse(data, response, error))
       }
     }
 

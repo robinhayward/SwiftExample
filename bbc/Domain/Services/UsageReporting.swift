@@ -9,7 +9,11 @@
 import Foundation
 
 struct UsageReport {
-  let name: String
+  enum Name: String {
+    case load, display, error
+  }
+
+  let name: UsageReport.Name
   let data: [String: String]
 }
 
@@ -18,26 +22,13 @@ protocol UsageReporter {
 }
 
 class Usage: UsageReporter {
-  let session: URLSession
+  let api: APIInterface
 
-  init(session: URLSession = URLSession.shared) {
-    self.session = session
+  init(api: APIInterface = API()) {
+    self.api = api
   }
 
   func register(_ report: UsageReport) {
-
-  }
-}
-
-// MARK: - Housekeep
-
-class UsageReportToUrl {
-  class func execute(url: String, report: UsageReport) -> String {
-    var query: String = "event=\(report.name)"
-    for key in report.data.keys {
-      query = "\(query)&\(key)=\(report.data[key]!)"
-    }
-
-    return "\(url)?\(query)"
+    api.send(report)
   }
 }
