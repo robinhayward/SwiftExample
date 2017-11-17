@@ -9,10 +9,22 @@
 import Foundation
 import UIKit
 
+protocol FruitListingAssembly {
+  var wireframe: FruitListingWireframe { get set }
+  var grocery: GroceryAssistant { get set }
+  var usage: UsageReporter { get set }
+}
+
+struct FruitListingAssemblyDefault: FruitListingAssembly {
+  var wireframe: FruitListingWireframe
+  var grocery: GroceryAssistant
+  var usage: UsageReporter
+}
+
 class FruitListingAssembler {
-  class func assemble(wireframe: FruitListingWireframe, grocery: GroceryAssistant = Grocery(), usage: UsageReporter = Usage()) -> UIViewController {
-    let interactor = FruitListingInteractor(grocery, usage: usage)
-    let presenter = FruitListingPresenter(wireframe)
+  class func assemble(assembly: FruitListingAssembly) -> UIViewController {
+    let interactor = FruitListingInteractor(assembly.grocery, usage: assembly.usage)
+    let presenter = FruitListingPresenter(assembly.wireframe)
     let view = FruitListingView(presenter)
 
     interactor.output = presenter
@@ -23,8 +35,8 @@ class FruitListingAssembler {
     return view
   }
 
-  class func assembleWithinNavigationController(with wireframe: FruitListingWireframe) -> UINavigationController {
-    let view = assemble(wireframe: wireframe)
+  class func assembleWithinNavigationController(assembly: FruitListingAssembly) -> UINavigationController {
+    let view = assemble(assembly: assembly)
 
     return UINavigationController(rootViewController: view)
   }

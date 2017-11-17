@@ -15,25 +15,25 @@ import Nimble
 class FruitListingSpec: QuickSpec {
   override func spec() {
     var sut: FruitListingView!
-    var usage: UsageReporterSpy!
-    var grocery: GroceryAssistantFake!
+    var assembly: FruitListingAssemblyTest!
     var ui: FruitListingUISpy!
-    var wireframe: FruitListingWireframeSpy!
 
     describe("Fruit listing") {
+      beforeEach {
+        assembly = FruitListingAssemblyTest()
+      }
       describe("when the user first arrives") {
         beforeEach {
           ui = FruitListingUISpy()
-          grocery = GroceryAssistantFake()
-          usage = UsageReporterSpy()
-          wireframe = FruitListingWireframeSpy()
 
-          sut = FruitListingAssembler.assemble(wireframe: wireframe, grocery: grocery, usage: usage) as! FruitListingView
+          sut = FruitListingAssembler.assemble(assembly: assembly) as! FruitListingView
           sut.presenter.ui = ui
 
           sut.viewWillAppear(false)
         }
         it("sends the correct usage report for display") {
+          let usage = assembly.usage as! UsageReporterSpy
+
           expect(usage.regiesteredReport).toNot(beNil())
         }
         it("shows the loading screen") {
@@ -43,12 +43,10 @@ class FruitListingSpec: QuickSpec {
 
       describe("when fruit loads successfully") {
         beforeEach {
+          let grocery = assembly.grocery as! GroceryAssistantFake
           ui = FruitListingUISpy()
-          grocery = GroceryAssistantFake()
-          usage = UsageReporterSpy()
-          wireframe = FruitListingWireframeSpy()
 
-          sut = FruitListingAssembler.assemble(wireframe: wireframe, grocery: grocery, usage: usage) as! FruitListingView
+          sut = FruitListingAssembler.assemble(assembly: assembly) as! FruitListingView
           sut.presenter.ui = ui
 
           sut.viewWillAppear(false)
@@ -64,12 +62,10 @@ class FruitListingSpec: QuickSpec {
 
       describe("when fruit loads successfully with but empty") {
         beforeEach {
+          let grocery = assembly.grocery as! GroceryAssistantFake
           ui = FruitListingUISpy()
-          grocery = GroceryAssistantFake()
-          usage = UsageReporterSpy()
-          wireframe = FruitListingWireframeSpy()
 
-          sut = FruitListingAssembler.assemble(wireframe: wireframe, grocery: grocery, usage: usage) as! FruitListingView
+          sut = FruitListingAssembler.assemble(assembly: assembly) as! FruitListingView
           sut.presenter.ui = ui
 
           sut.viewWillAppear(false)
@@ -85,12 +81,10 @@ class FruitListingSpec: QuickSpec {
 
       describe("when fruit fails to load") {
         beforeEach {
+          let grocery = assembly.grocery as! GroceryAssistantFake
           ui = FruitListingUISpy()
-          grocery = GroceryAssistantFake()
-          usage = UsageReporterSpy()
-          wireframe = FruitListingWireframeSpy()
 
-          sut = FruitListingAssembler.assemble(wireframe: wireframe, grocery: grocery, usage: usage) as! FruitListingView
+          sut = FruitListingAssembler.assemble(assembly: assembly) as! FruitListingView
           sut.presenter.ui = ui
 
           sut.viewWillAppear(false)
@@ -107,12 +101,10 @@ class FruitListingSpec: QuickSpec {
       describe("when there was an error loading fruit") {
         describe("retry") {
           beforeEach {
+            let grocery = assembly.grocery as! GroceryAssistantFake
             ui = FruitListingUISpy()
-            grocery = GroceryAssistantFake()
-            usage = UsageReporterSpy()
-            wireframe = FruitListingWireframeSpy()
 
-            sut = FruitListingAssembler.assemble(wireframe: wireframe, grocery: grocery, usage: usage) as! FruitListingView
+            sut = FruitListingAssembler.assemble(assembly: assembly) as! FruitListingView
             sut.presenter.ui = ui
 
             sut.viewWillAppear(false)
@@ -129,12 +121,10 @@ class FruitListingSpec: QuickSpec {
       describe("when fruit is loaded") {
         describe("pull to refresh") {
           beforeEach {
+            let grocery = assembly.grocery as! GroceryAssistantFake
             ui = FruitListingUISpy()
-            grocery = GroceryAssistantFake()
-            usage = UsageReporterSpy()
-            wireframe = FruitListingWireframeSpy()
 
-            sut = FruitListingAssembler.assemble(wireframe: wireframe, grocery: grocery, usage: usage) as! FruitListingView
+            sut = FruitListingAssembler.assemble(assembly: assembly) as! FruitListingView
             sut.presenter.ui = ui
 
             sut.viewWillAppear(false)
@@ -151,11 +141,8 @@ class FruitListingSpec: QuickSpec {
 
       describe("when the user selects a fruit") {
         beforeEach {
-          grocery = GroceryAssistantFake()
-          usage = UsageReporterSpy()
-          wireframe = FruitListingWireframeSpy()
-
-          sut = FruitListingAssembler.assemble(wireframe: wireframe, grocery: grocery, usage: usage) as! FruitListingView
+          let grocery = assembly.grocery as! GroceryAssistantFake
+          sut = FruitListingAssembler.assemble(assembly: assembly) as! FruitListingView
 
           sut.loadView()
           sut.viewWillAppear(false)
@@ -164,6 +151,8 @@ class FruitListingSpec: QuickSpec {
         }
 
         it("notifies the wireframe") {
+          let wireframe = assembly.wireframe as! FruitListingWireframeSpy
+
           expect(wireframe.selection).toNot(beNil())
           expect(wireframe.selection?.type).to(equal("pear"))
         }
@@ -173,6 +162,12 @@ class FruitListingSpec: QuickSpec {
 }
 
 // MARK: - Helpers
+
+struct FruitListingAssemblyTest: FruitListingAssembly {
+  var wireframe: FruitListingWireframe = FruitListingWireframeSpy()
+  var grocery: GroceryAssistant = GroceryAssistantFake()
+  var usage: UsageReporter = UsageReporterSpy()
+}
 
 class FruitListingWireframeSpy: FruitListingWireframe {
   var selection: Fruit?

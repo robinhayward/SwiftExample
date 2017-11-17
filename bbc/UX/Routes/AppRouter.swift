@@ -46,10 +46,12 @@ extension AppRouter: FruitDetailWireframe {
 
 class AppRouterFactory {
   func listings(wireframe: FruitListingWireframe) -> UINavigationController {
-    return FruitListingAssembler.assembleWithinNavigationController(with: wireframe)
+    let assembly = FruitListingAssemblyDefault(wireframe: wireframe, grocery: Grocery(), usage: Usage())
+    return FruitListingAssembler.assembleWithinNavigationController(assembly: assembly)
   }
 
   func detail(wireframe: FruitDetailWireframe, fruit: Fruit) -> UIViewController {
-    return FruitDetailAssembler.assemble(wireframe: wireframe, fruit: fruit, usage: Usage())
+    let assembly = FruitDetailAssemblyDefault(wireframe: wireframe, fruit: fruit, usage: Usage())
+    return FruitDetailAssembler.assemble(assembly: assembly)
   }
 }

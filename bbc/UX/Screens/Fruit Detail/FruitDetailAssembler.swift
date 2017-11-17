@@ -9,10 +9,22 @@
 import Foundation
 import UIKit
 
+protocol FruitDetailAssembly {
+  var wireframe: FruitDetailWireframe { get set }
+  var fruit: Fruit { get set }
+  var usage: UsageReporter { get set }
+}
+
+struct FruitDetailAssemblyDefault: FruitDetailAssembly {
+  var wireframe: FruitDetailWireframe
+  var fruit: Fruit
+  var usage: UsageReporter
+}
+
 class FruitDetailAssembler {
-  class func assemble(wireframe: FruitDetailWireframe, fruit: Fruit, usage: UsageReporter) -> UIViewController {
-    let interactor = FruitDetailInteractor(fruit, usage: usage)
-    let presenter = FruitDetailPresenter(wireframe)
+  class func assemble(assembly: FruitDetailAssembly) -> UIViewController {
+    let interactor = FruitDetailInteractor(assembly.fruit, usage: assembly.usage)
+    let presenter = FruitDetailPresenter(assembly.wireframe)
     let view = FruitDetailView(presenter)
 
     interactor.output = presenter

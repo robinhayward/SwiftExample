@@ -15,27 +15,28 @@ import Nimble
 class FruitDetailSpec: QuickSpec {
   override func spec() {
     var sut: FruitDetailView!
-    var usage: UsageReporterSpy!
     var ui: FruitDetailUISpy!
-    var wireframe: FruitDetailWireframeSpy!
-    let fruit: Fruit = FruitFactory.apple()
-    
+    var assembly: FruitDetailAssemblyTest!
+
     describe("Fruit detail") {
+      beforeEach {
+        assembly = FruitDetailAssemblyTest()
+      }
       describe("when the user first arrives") {
         beforeEach {
           ui = FruitDetailUISpy()
-          usage = UsageReporterSpy()
-          wireframe = FruitDetailWireframeSpy()
           
-          sut = FruitDetailAssembler.assemble(wireframe: wireframe, fruit: fruit, usage: usage) as! FruitDetailView
+          sut = FruitDetailAssembler.assemble(assembly: assembly) as! FruitDetailView
           sut.presenter.ui = ui
 
           sut.viewWillAppear(false)
         }
         it("sends the correct usage report for display") {
+          let usage = assembly.usage as! UsageReporterSpy
+
           expect(usage.regiesteredReport).toNot(beNil())
           expect(usage.regiesteredReport?.name).to(equal(UsageReport.Name.display))
-          expect(usage.regiesteredReport?.data["fruit-type"]).to(equal(fruit.type))
+          expect(usage.regiesteredReport?.data["fruit-type"]).to(equal(assembly.fruit.type))
         }
         it("updates the ui with the correctly formatted fruit information") {
           expect(ui.content?.doneButtonTitle).to(equal("DONE"))
@@ -50,20 +51,27 @@ class FruitDetailSpec: QuickSpec {
       describe("when the user is done") {
         beforeEach {
           ui = FruitDetailUISpy()
-          usage = UsageReporterSpy()
-          wireframe = FruitDetailWireframeSpy()
-          sut = FruitDetailAssembler.assemble(wireframe: wireframe, fruit: fruit, usage: usage) as! FruitDetailView
+
+          sut = FruitDetailAssembler.assemble(assembly: assembly) as! FruitDetailView
           sut.presenter.ui = ui
 
           sut.viewWillAppear(false)
           sut.user.done()
         }
         it("notifies the wireframe") {
+          let wireframe = assembly.wireframe as! FruitDetailWireframeSpy
+
           expect(wireframe.fruitDetailDoneCalled).to(beTrue())
         }
       }
     }
   }
+}
+
+class FruitDetailAssemblyTest: FruitDetailAssembly {
+  var wireframe: FruitDetailWireframe = FruitDetailWireframeSpy()
+  var fruit: Fruit = FruitFactory.apple()
+  var usage: UsageReporter = UsageReporterSpy()
 }
 
 class FruitDetailUISpy: FruitDetailUI {
