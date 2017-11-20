@@ -15,7 +15,7 @@ class AppRouter {
 
   private var root: UINavigationController?
 
-  init(factory: AppRouterFactory = AppRouterFactory(sdk: SupermarketSDK())) {
+  init(factory: AppRouterFactory = AppRouterFactory(sdk: SDKFactory.create())) {
     self.factory = factory
   }
 
@@ -43,6 +43,17 @@ extension AppRouter: FruitDetailWireframe {
 }
 
 // MARK: - Factory
+
+class SDKFactory {
+  class func create() -> Supermarket {
+    let arguments = ProcessInfo.processInfo.arguments
+    if  arguments.contains("UITestingErrorPath") {
+      return SupermarketFake()
+    }
+
+    return SupermarketSDK()
+  }
+}
 
 struct AppRouterFactory {
   let sdk: Supermarket

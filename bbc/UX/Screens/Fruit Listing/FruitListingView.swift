@@ -79,6 +79,7 @@ class FruitListingView: UIViewController, FruitListingUI {
   func updateListingFailure(_ error: GroceryError) {
     tableView?.isHidden = true
     activityLabel?.text = "Oh no, something went wrong"
+    activityLabel?.isHidden = false
     activityButton?.setTitle("Retry", for: .normal)
     activityButton?.isHidden = false
     activityIndicator?.stopAnimating()

@@ -1,5 +1,5 @@
 //
-//  bbcUITests.swift
+//  HappyPath.swift
 //  bbcUITests
 //
 //  Created by Robin Hayward on 20/11/2017.
@@ -8,12 +8,13 @@
 
 import XCTest
 
-class bbcUITests: XCTestCase {
+class HappyPath: XCTestCase {
   var app: XCUIApplication!
   override func setUp() {
     super.setUp()
     continueAfterFailure = false
     app = XCUIApplication()
+    app.launchArguments = ["UITestingHappyPath"]
     app.launch()
   }
 
