@@ -24,11 +24,11 @@ class UsageReportRequestSpec: QuickSpec {
       }
 
       describe("create") {
-        it("sends a valid url request to the api") {
+        it("returns a valid request") {
           let request = sut.create()
           expect(request).toNot(beNil())
-          expect(request?.urlRequest.url?.absoluteString).to(equal("https://raw.githubusercontent.com/fmtvp/recruit-test-data/master/stats?event=display&unencoded=encode%20me%20!%20please%2023&fruit-type=apple"))
-          expect(request?.urlRequest.httpMethod).to(equal("GET"))
+          expect(request.urlRequest.url?.absoluteString).to(equal("https://raw.githubusercontent.com/fmtvp/recruit-test-data/master/stats?event=display&unencoded=encode%20me%20!%20please%2023&fruit-type=apple"))
+          expect(request.urlRequest.httpMethod).to(equal("GET"))
         }
       }
     }

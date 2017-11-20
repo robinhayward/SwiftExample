@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+
 
 @testable import bbc
 
@@ -25,5 +27,9 @@ class NetworkResponseFactory {
 
   class func serverError() -> NetworkResponse {
     return NetworkResponse(nil, HTTPURLResponseFactory.status(code: 500), nil, 0.1, reportable: true)
+  }
+
+  class func connectionError() -> NetworkResponse {
+    return NetworkResponse(nil, nil, NSError(domain: "ConnectionError", code: 1, userInfo: nil), 0.1, reportable: true)
   }
 }

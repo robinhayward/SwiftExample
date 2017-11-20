@@ -60,6 +60,10 @@
 		0BE77F221FC2CF8300FED14E /* NetworkSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE77F211FC2CF8300FED14E /* NetworkSpec.swift */; };
 		0BE77F261FC2DB7F00FED14E /* ReferenceDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE77F251FC2DB7F00FED14E /* ReferenceDates.swift */; };
 		0BE77F281FC2E0D400FED14E /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE77F271FC2E0D400FED14E /* Macros.swift */; };
+		0BE77F2B1FC2E3D500FED14E /* FruitResponseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE77F2A1FC2E3D500FED14E /* FruitResponseSpec.swift */; };
+		0BE77F2D1FC2E56D00FED14E /* UsageReportResponseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE77F2C1FC2E56D00FED14E /* UsageReportResponseSpec.swift */; };
+		0BE77F301FC2EBAF00FED14E /* ReferenceDatesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE77F2F1FC2EBAF00FED14E /* ReferenceDatesSpec.swift */; };
+		0BE77F321FC2EE5900FED14E /* FruitRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE77F311FC2EE5900FED14E /* FruitRequestSpec.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +146,10 @@
 		0BE77F211FC2CF8300FED14E /* NetworkSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSpec.swift; sourceTree = "<group>"; };
 		0BE77F251FC2DB7F00FED14E /* ReferenceDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceDates.swift; sourceTree = "<group>"; };
 		0BE77F271FC2E0D400FED14E /* Macros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
+		0BE77F2A1FC2E3D500FED14E /* FruitResponseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitResponseSpec.swift; sourceTree = "<group>"; };
+		0BE77F2C1FC2E56D00FED14E /* UsageReportResponseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageReportResponseSpec.swift; sourceTree = "<group>"; };
+		0BE77F2F1FC2EBAF00FED14E /* ReferenceDatesSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceDatesSpec.swift; sourceTree = "<group>"; };
+		0BE77F311FC2EE5900FED14E /* FruitRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitRequestSpec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -392,6 +400,7 @@
 			children = (
 				0B33077B1FBF582700CE0026 /* APISpec.swift */,
 				0B3307741FBF56E700CE0026 /* Requests */,
+				0BE77F291FC2E3BF00FED14E /* Responses */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -399,6 +408,7 @@
 		0B3307741FBF56E700CE0026 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				0BE77F311FC2EE5900FED14E /* FruitRequestSpec.swift */,
 				0B3307711FBF56DB00CE0026 /* UsageReportRequestSpec.swift */,
 			);
 			path = Requests;
@@ -434,6 +444,7 @@
 			isa = PBXGroup;
 			children = (
 				0B33077D1FBF58C300CE0026 /* _ */,
+				0BE77F2E1FC2EB9E00FED14E /* Library */,
 				0B33075C1FBF468000CE0026 /* UX */,
 				0B33075D1FBF468B00CE0026 /* Domain */,
 			);
@@ -479,6 +490,23 @@
 				0BE77F271FC2E0D400FED14E /* Macros.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		0BE77F291FC2E3BF00FED14E /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				0BE77F2A1FC2E3D500FED14E /* FruitResponseSpec.swift */,
+				0BE77F2C1FC2E56D00FED14E /* UsageReportResponseSpec.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		0BE77F2E1FC2EB9E00FED14E /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				0BE77F2F1FC2EBAF00FED14E /* ReferenceDatesSpec.swift */,
+			);
+			path = Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -628,16 +656,20 @@
 				0B3307571FBF3CA800CE0026 /* GroceryAssistantFake.swift in Sources */,
 				0B33075B1FBF42F200CE0026 /* FruitDetailSpec.swift in Sources */,
 				0B3307681FBF4B8900CE0026 /* NetworkResponseFactory.swift in Sources */,
+				0BE77F301FC2EBAF00FED14E /* ReferenceDatesSpec.swift in Sources */,
 				0BE77F1F1FC2BF2800FED14E /* InterfaceSpec.swift in Sources */,
 				0B3307621FBF46D200CE0026 /* GrocerySpec.swift in Sources */,
+				0BE77F2B1FC2E3D500FED14E /* FruitResponseSpec.swift in Sources */,
 				0B3307551FBF3BE900CE0026 /* UserReporterSpy.swift in Sources */,
 				0BD510E71FBF2EED00FDAE69 /* FruitListingSpec.swift in Sources */,
 				0B3307591FBF3CBD00CE0026 /* FruitFactory.swift in Sources */,
 				0B33076A1FBF4D0D00CE0026 /* NetworkInterfaceFake.swift in Sources */,
 				0B33076C1FBF4D2700CE0026 /* UsageSpec.swift in Sources */,
 				0B33077C1FBF582700CE0026 /* APISpec.swift in Sources */,
+				0BE77F321FC2EE5900FED14E /* FruitRequestSpec.swift in Sources */,
 				0B3307661FBF4B1B00CE0026 /* JSONFactory.swift in Sources */,
 				0B3307641FBF4B0400CE0026 /* URLSessionFake.swift in Sources */,
+				0BE77F2D1FC2E56D00FED14E /* UsageReportResponseSpec.swift in Sources */,
 				0BE77F221FC2CF8300FED14E /* NetworkSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

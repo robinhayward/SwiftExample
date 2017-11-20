@@ -29,6 +29,15 @@ public enum Result<T, U> {
     }
   }
 
+  func data() -> T? {
+    switch self {
+    case .success(let data):
+      return data
+    default:
+      return nil
+    }
+  }
+
   func error() -> U? {
     switch self {
     case .failure(let error):

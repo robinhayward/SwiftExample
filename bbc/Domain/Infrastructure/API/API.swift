@@ -26,10 +26,7 @@ class API: APIInterface {
   }
 
   func fruit(_ completion: @escaping ((GroceryResult) -> ())) {
-    guard let request = FruitRequest(config: config).create() else {
-      completion(GroceryResult(.unknown))
-      return
-    }
+    let request = FruitRequest(config: config).create()
 
     network.run(request) { response in
       completion(FruitResponse.handle(response))
@@ -37,10 +34,7 @@ class API: APIInterface {
   }
 
   func track(_ report: UsageReport, _ completion: ((UsageReportError?) -> ())?) {
-    guard let request = UsageReportRequest(config: config, report: report).create() else {
-      completion?(UsageReportError.badRequestData)
-      return
-    }
+    let request = UsageReportRequest(config: config, report: report).create()
 
     network.run(request) { response in
       completion?(UsageReportResponse.handle(response))

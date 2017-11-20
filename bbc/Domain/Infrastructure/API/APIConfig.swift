@@ -8,6 +8,10 @@
 
 import Foundation
 
-struct APIConfig {
-  let host: String = "https://raw.githubusercontent.com/fmtvp/recruit-test-data/master"
+class APIConfig {
+  let host: String
+
+  init(host: String = "https://raw.githubusercontent.com/fmtvp/recruit-test-data/master") {
+    self.host = host
+  }
 }
