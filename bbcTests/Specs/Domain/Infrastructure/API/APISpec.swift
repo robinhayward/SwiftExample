@@ -72,8 +72,8 @@ class APISpec: QuickSpec {
         }
         it("sends a valid request to the network") {
           expect(network.request).toNot(beNil())
-          expect(network.request?.url?.absoluteString).to(equal("https://raw.githubusercontent.com/fmtvp/recruit-test-data/master/data.json"))
-          expect(network.request?.httpMethod).to(equal("GET"))
+          expect(network.request?.urlRequest.url?.absoluteString).to(equal("https://raw.githubusercontent.com/fmtvp/recruit-test-data/master/data.json"))
+          expect(network.request?.urlRequest.httpMethod).to(equal("GET"))
         }
       }
 
@@ -88,8 +88,8 @@ class APISpec: QuickSpec {
           }
           it("sends a valid request to the network") {
             expect(network.request).toNot(beNil())
-            expect(network.request?.url?.absoluteString).to(equal("https://raw.githubusercontent.com/fmtvp/recruit-test-data/master/data.json"))
-            expect(network.request?.httpMethod).to(equal("GET"))
+            expect(network.request?.urlRequest.url?.absoluteString).to(equal("https://raw.githubusercontent.com/fmtvp/recruit-test-data/master/data.json"))
+            expect(network.request?.urlRequest.httpMethod).to(equal("GET"))
           }
           it("fires the completion block with fruit") {
             expect(result).toNot(beNil())
@@ -142,8 +142,8 @@ class APISpec: QuickSpec {
         }
         it("sends a valid request to the network") {
           expect(network.request).toNot(beNil())
-          expect(network.request?.url?.absoluteString).to(equal("https://raw.githubusercontent.com/fmtvp/recruit-test-data/master/stats?event=display&fruit-type=apple"))
-          expect(network.request?.httpMethod).to(equal("GET"))
+          expect(network.request?.urlRequest.url?.absoluteString).to(equal("https://raw.githubusercontent.com/fmtvp/recruit-test-data/master/stats?event=display&fruit-type=apple"))
+          expect(network.request?.urlRequest.httpMethod).to(equal("GET"))
         }
       }
 

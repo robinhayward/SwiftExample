@@ -14,13 +14,13 @@ struct UsageReportRequest {
 
   private let resource = "/stats"
 
-  func create() -> URLRequest? {
+  func create() -> NetworkRequest? {
     guard let url = url() else { return nil }
 
     let request = NSMutableURLRequest(url: url)
     request.httpMethod = "GET"
 
-    return request as URLRequest
+    return NetworkRequest(urlRequest: request as URLRequest, report: false)
   }
 
   private func url() -> URL? {

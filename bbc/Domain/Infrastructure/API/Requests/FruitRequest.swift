@@ -13,13 +13,13 @@ struct FruitRequest {
 
   private let resource = "/data.json"
 
-  func create() -> URLRequest? {
+  func create() -> NetworkRequest? {
     guard let url = URL(string: "\(config.host)\(resource)") else {
       return nil
     }
     let request = NSMutableURLRequest(url: url)
     request.httpMethod = "GET"
 
-    return request as URLRequest
+    return NetworkRequest(urlRequest: request as URLRequest, report: true)
   }
 }

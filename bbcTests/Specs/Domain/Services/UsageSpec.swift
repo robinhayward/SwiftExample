@@ -33,8 +33,8 @@ class UsageSpec: QuickSpec {
         }
         it("sends a valid url request to the api") {
           expect(network.request).toNot(beNil())
-          expect(network.request?.url?.absoluteString).to(equal("https://raw.githubusercontent.com/fmtvp/recruit-test-data/master/stats?event=display&fruit-type=apple"))
-          expect(network.request?.httpMethod).to(equal("GET"))
+          expect(network.request?.urlRequest.url?.absoluteString).to(equal("https://raw.githubusercontent.com/fmtvp/recruit-test-data/master/stats?event=display&fruit-type=apple"))
+          expect(network.request?.urlRequest.httpMethod).to(equal("GET"))
         }
       }
 

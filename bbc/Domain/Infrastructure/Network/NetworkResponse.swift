@@ -13,6 +13,7 @@ struct NetworkResponse: CustomStringConvertible {
   let response: URLResponse?
   let error: Error?
   let duration: TimeInterval
+  let reportable: Bool
 
   var statusCode: Int? { return (response as? HTTPURLResponse)?.statusCode }
 
@@ -28,10 +29,11 @@ struct NetworkResponse: CustomStringConvertible {
     return info
   }
 
-  init(_ data: Data?, _ response: URLResponse?, _ error: Error?, _ duration: TimeInterval) {
+  init(_ data: Data?, _ response: URLResponse?, _ error: Error?, _ duration: TimeInterval, reportable: Bool) {
     self.data = data
     self.response = response
     self.error = error
     self.duration = duration
+    self.reportable = reportable
   }
 }

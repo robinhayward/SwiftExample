@@ -12,10 +12,10 @@ import Foundation
 
 class NetworkFake: NetworkInterface {
   var reporter: NetworkReporter?
-  var request: URLRequest?
+  var request: NetworkRequest?
   var completion: ((NetworkResponse) -> ())?
 
-  func run(_ request: URLRequest, _ completion: @escaping ((NetworkResponse) -> ())) {
+  func run(_ request: NetworkRequest, _ completion: @escaping ((NetworkResponse) -> ())) {
     self.request = request
     self.completion = completion
   }

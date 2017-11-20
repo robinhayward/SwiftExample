@@ -26,46 +26,82 @@ class NetworkSpec: QuickSpec {
       }
 
       describe("run") {
-        context("always") {
-          let request = URLRequest(url: URL(string: "https://api.com")!)
+        describe("always") {
+          let request = NetworkRequestFactory.create()
 
           beforeEach {
             sut.run(request) { r in }
           }
           it("starts a data task with the url request") {
-            expect(session.request).to(equal(request))
+            expect(session.request).to(equal(request.urlRequest))
             expect(session.requestInProgress).toNot(beNil())
             expect(session.requestInProgress?.resumed).to(beTrue())
           }
         }
 
-        context("completion") {
-          let request = URLRequest(url: URL(string: "https://api.com")!)
-          var result: NetworkResponse?
+        describe("completion") {
+          context("reportable request") {
+            let request = NetworkRequestFactory.create()
+            var result: NetworkResponse?
 
-          let data: Data = JSONFactory.fruit()
-          let http: URLResponse = HTTPURLResponseFactory.serverError()
-          let error: NSError = NSError(domain: "test", code: 1, userInfo: nil)
+            let data: Data = JSONFactory.fruit()
+            let http: URLResponse = HTTPURLResponseFactory.serverError()
+            let error: NSError = NSError(domain: "test", code: 1, userInfo: nil)
 
-          beforeEach {
-            sut.run(request) { r in
-              result = r
+            beforeEach {
+              sut.run(request) { r in
+                result = r
+              }
+              session.requestCompletionHandler?(data, http, error)
             }
-            session.requestCompletionHandler?(data, http, error)
+            it("fires the completion block with a valid response object") {
+              expect(result).toNot(beNil())
+              expect(result?.data).toNot(beNil())
+              expect(result?.response).toNot(beNil())
+              expect(result?.error).toNot(beNil())
+              expect(result?.duration).toNot(equal(0))
+            }
+            it("sends the response to the reporter") {
+              expect(reporter.reportedResponse).toNot(beNil())
+            }
           }
-          it("fires the completion block with a valid response object") {
-            expect(result).toNot(beNil())
-            expect(result?.data).toNot(beNil())
-            expect(result?.response).toNot(beNil())
-            expect(result?.error).toNot(beNil())
-            expect(result?.duration).toNot(equal(0))
-          }
-          it("sends the response to the reporter") {
-            expect(reporter.reportedResponse).toNot(beNil())
+        }
+
+        describe("completion") {
+          context("non reportable request") {
+            let request = NetworkRequestFactory.create(reportable: false)
+            var result: NetworkResponse?
+
+            let data: Data = JSONFactory.fruit()
+            let http: URLResponse = HTTPURLResponseFactory.serverError()
+            let error: NSError = NSError(domain: "test", code: 1, userInfo: nil)
+
+            beforeEach {
+              sut.run(request) { r in
+                result = r
+              }
+              session.requestCompletionHandler?(data, http, error)
+            }
+            it("fires the completion block with a valid response object") {
+              expect(result).toNot(beNil())
+              expect(result?.data).toNot(beNil())
+              expect(result?.response).toNot(beNil())
+              expect(result?.error).toNot(beNil())
+              expect(result?.duration).toNot(equal(0))
+            }
+            it("does not send the response to the reporter") {
+              expect(reporter.reportedResponse).to(beNil())
+            }
           }
         }
       }
     }
+  }
+}
+
+class NetworkRequestFactory {
+  class func create(reportable: Bool = true) -> NetworkRequest {
+    return NetworkRequest(urlRequest: URLRequest(url: URL(string: "https://api.com")!), report: reportable)
   }
 }
 

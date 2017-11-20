@@ -12,18 +12,18 @@ import Foundation
 
 class NetworkResponseFactory {
   class func statusTwoHundredNoDataExpected() -> NetworkResponse {
-    return NetworkResponse(nil, HTTPURLResponseFactory.good(), nil, 0.7)
+    return NetworkResponse(nil, HTTPURLResponseFactory.good(), nil, 0.7, reportable: true)
   }
 
   class func fruit() -> NetworkResponse {
-    return NetworkResponse(JSONFactory.fruit(), HTTPURLResponseFactory.good(), nil, 0.7)
+    return NetworkResponse(JSONFactory.fruit(), HTTPURLResponseFactory.good(), nil, 0.7, reportable: true)
   }
 
   class func badFruit() -> NetworkResponse {
-    return NetworkResponse(JSONFactory.bad(), HTTPURLResponseFactory.good(), nil, 0.7)
+    return NetworkResponse(JSONFactory.bad(), HTTPURLResponseFactory.good(), nil, 0.7, reportable: true)
   }
 
   class func serverError() -> NetworkResponse {
-    return NetworkResponse(nil, HTTPURLResponseFactory.status(code: 500), nil, 0.1)
+    return NetworkResponse(nil, HTTPURLResponseFactory.status(code: 500), nil, 0.1, reportable: true)
   }
 }
