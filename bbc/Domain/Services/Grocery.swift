@@ -13,6 +13,10 @@ public enum GroceryError: Error {
   case unknown
   case badDataReceived
   case requestFailed // TODO.. add more granular error reporting
+
+  func description() -> String {
+    return "\(self)"
+  }
 }
 
 public typealias GroceryResult = Result<[Fruit], GroceryError>

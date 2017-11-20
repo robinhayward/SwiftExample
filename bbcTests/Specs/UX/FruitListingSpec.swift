@@ -31,11 +31,6 @@ class FruitListingSpec: QuickSpec {
         sut.viewWillAppear(false)
       }
       describe("when the user first arrives") {
-        it("sends the correct usage report for display") {
-          let usage = assembly.usage as! UsageReporterSpy
-
-          expect(usage.reports.first).toNot(beNil())
-        }
         it("shows the loading screen") {
           expect(ui.loadingCalled).to(beTrue())
         }
@@ -51,6 +46,13 @@ class FruitListingSpec: QuickSpec {
         }
         it("dismisses the loading state") {
           expect(ui.finishLoadingCalled).to(beTrue())
+        }
+        it("sends the correct usage report for display") {
+          let usage = assembly.usage as! UsageReporterSpy
+
+          expect(usage.reports.first).toNot(beNil())
+          expect(usage.reports.first?.name).to(equal(UsageReport.Name.display))
+          expect(usage.reports.first?.data["screen"]).to(equal("fruit-listings"))
         }
       }
 
@@ -77,6 +79,19 @@ class FruitListingSpec: QuickSpec {
         }
         it("presents an error") {
           expect(ui.recievedError).toNot(beNil())
+        }
+        it("sends a display report") {
+          let reporter = assembly.usage as! UsageReporterSpy
+          expect(reporter.reports[1]).toNot(beNil())
+          expect(reporter.reports[1].name).to(equal(UsageReport.Name.display))
+        }
+        it("sends an error report") {
+          let reporter = assembly.usage as! UsageReporterSpy
+          expect(reporter.reports[0]).toNot(beNil())
+          expect(reporter.reports[0].name).to(equal(UsageReport.Name.error))
+          expect(reporter.reports[0].data["data"]).to(equal("requestFailed"))
+          expect(reporter.reports[0].data["file"]).to(equal("FruitListingInteractor.swift"))
+          expect(reporter.reports[0].data["line"]).to(equal("53"))
         }
       }
 

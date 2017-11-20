@@ -58,6 +58,8 @@
 		0BE77F191FC2BADA00FED14E /* Supermarket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE77F181FC2BADA00FED14E /* Supermarket.swift */; };
 		0BE77F1F1FC2BF2800FED14E /* InterfaceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE77F1E1FC2BF2800FED14E /* InterfaceSpec.swift */; };
 		0BE77F221FC2CF8300FED14E /* NetworkSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE77F211FC2CF8300FED14E /* NetworkSpec.swift */; };
+		0BE77F261FC2DB7F00FED14E /* ReferenceDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE77F251FC2DB7F00FED14E /* ReferenceDates.swift */; };
+		0BE77F281FC2E0D400FED14E /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE77F271FC2E0D400FED14E /* Macros.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +140,8 @@
 		0BE77F181FC2BADA00FED14E /* Supermarket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Supermarket.swift; sourceTree = "<group>"; };
 		0BE77F1E1FC2BF2800FED14E /* InterfaceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceSpec.swift; sourceTree = "<group>"; };
 		0BE77F211FC2CF8300FED14E /* NetworkSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSpec.swift; sourceTree = "<group>"; };
+		0BE77F251FC2DB7F00FED14E /* ReferenceDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceDates.swift; sourceTree = "<group>"; };
+		0BE77F271FC2E0D400FED14E /* Macros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				0B295CD01FBC8EF700898DA7 /* App.swift */,
+				0BE77F231FC2DB6A00FED14E /* Library */,
 				0B295D0E1FBC908F00898DA7 /* UX */,
 				0B295D0F1FBC909400898DA7 /* Domain */,
 				0B295CD71FBC8EF700898DA7 /* Assets.xcassets */,
@@ -281,8 +286,8 @@
 		0B295D2D1FBC962700898DA7 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				0B295CF01FBC8F1400898DA7 /* Fruit Detail */,
 				0B295CF11FBC8F1A00898DA7 /* Fruit Listing */,
+				0B295CF01FBC8F1400898DA7 /* Fruit Detail */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -459,6 +464,23 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		0BE77F231FC2DB6A00FED14E /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				0BE77F241FC2DB7400FED14E /* Helpers */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		0BE77F241FC2DB7400FED14E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0BE77F251FC2DB7F00FED14E /* ReferenceDates.swift */,
+				0BE77F271FC2E0D400FED14E /* Macros.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -569,6 +591,7 @@
 				0B295D1D1FBC90F900898DA7 /* FruitListingView.swift in Sources */,
 				0B295D351FBC99BB00898DA7 /* AppRouter.swift in Sources */,
 				0B295D1A1FBC90F900898DA7 /* FruitListingPresenter.swift in Sources */,
+				0BE77F261FC2DB7F00FED14E /* ReferenceDates.swift in Sources */,
 				0B295CFA1FBC8F4100898DA7 /* FruitDetailPresenter.swift in Sources */,
 				0B295D1B1FBC90F900898DA7 /* FruitListingProtocols.swift in Sources */,
 				0B295D291FBC930400898DA7 /* Result.swift in Sources */,
@@ -584,6 +607,7 @@
 				0B6BF68C1FBF129100245157 /* FruitResponse.swift in Sources */,
 				0B33077A1FBF573500CE0026 /* UsageReportResponse.swift in Sources */,
 				0B6BF68E1FBF140200245157 /* UsageReportRequest.swift in Sources */,
+				0BE77F281FC2E0D400FED14E /* Macros.swift in Sources */,
 				0B0A7DAF1FBED22400293ED2 /* NetworkErrors.swift in Sources */,
 				0B295D1C1FBC90F900898DA7 /* FruitListingInteractor.swift in Sources */,
 				0B33076F1FBF51A900CE0026 /* API.swift in Sources */,

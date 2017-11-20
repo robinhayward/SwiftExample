@@ -15,25 +15,39 @@ class FruitDetailInteractor: FruitDetailInteractorInput {
   let entity: Fruit
   let usage: UsageReporter
 
+  private let referenceDate: ReferenceDates = ReferenceDates()
+
+  private struct ReferenceDateEvent {
+    static let display = "display"
+  }
+
   init(_ entity: Fruit, usage: UsageReporter) {
     self.entity = entity
     self.usage = usage
   }
 
   func welcome() {
-    report()
+    referenceDate.checkIn(ReferenceDateEvent.display)
     output?.update(entity)
+    sendDisplayReport()
   }
 
-  private func report() {
-    let event = UsageReport(
+  private func sendDisplayReport() {
+    let since = referenceDate.checkOut(ReferenceDateEvent.display)
+    let report = createDisplayReport(referenceDate: since)
+
+    usage.register(report, completion: nil)
+  }
+
+  private func createDisplayReport(referenceDate: Date) -> UsageReport {
+    let duration = Date.timeIntervalSinceReferenceDate - referenceDate.timeIntervalSinceReferenceDate
+    return UsageReport(
       name: .display,
       data: [
         "screen": "fruit-detail",
-        "fruit-type": entity.type
+        "fruit-type": entity.type,
+        "duration": "\(duration)"
       ]
     )
-
-    usage.register(event, completion: nil)
   }
 }

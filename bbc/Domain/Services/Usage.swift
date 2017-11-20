@@ -20,6 +20,7 @@ public struct UsageReport {
 
   let name: UsageReport.Name
   let data: [String: String]
+  let created: TimeInterval = Date.timeIntervalSinceReferenceDate
 }
 
 public protocol UsageReporter: class {
