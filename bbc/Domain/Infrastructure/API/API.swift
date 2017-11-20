@@ -10,18 +10,19 @@ import Foundation
 
 protocol APIInterface {
   func fruit(_ completion: @escaping ((GroceryResult) -> ()))
-  func send(_ report: UsageReport, _ completion: ((UsageReportError?) -> ())?)
+  func track(_ report: UsageReport, _ completion: ((UsageReportError?) -> ())?)
 }
 
 class API: APIInterface {
-  static let shared = API(network: Network.shared)
-  
   let config: APIConfig
-  let network: NetworkInterface
+  var network: NetworkInterface
 
-  init(network: NetworkInterface, config: APIConfig = APIConfig()) {
-    self.network = network
+  lazy internal var usage: UsageReporter = { return Usage(api: self) }()
+
+  init(config: APIConfig = APIConfig(), network: NetworkInterface = Network()) {
     self.config = config
+    self.network = network
+    self.network.reporter = self
   }
 
   func fruit(_ completion: @escaping ((GroceryResult) -> ())) {
@@ -35,7 +36,7 @@ class API: APIInterface {
     }
   }
 
-  func send(_ report: UsageReport, _ completion: ((UsageReportError?) -> ())?) {
+  func track(_ report: UsageReport, _ completion: ((UsageReportError?) -> ())?) {
     guard let request = UsageReportRequest(config: config, report: report).create() else {
       completion?(UsageReportError.badRequestData)
       return
@@ -44,5 +45,24 @@ class API: APIInterface {
     network.run(request) { response in
       completion?(UsageReportResponse.handle(response))
     }
+  }
+}
+
+extension API: NetworkReporter {
+  func report(_ response: NetworkResponse) {
+    let report = CreateReport.with(response)
+
+    usage.register(report, completion: nil)
+  }
+}
+
+fileprivate class CreateReport {
+  class func with(_ response: NetworkResponse) -> UsageReport {
+    return UsageReport(
+      name: .load, data: [
+        "data": "\(response.data?.count ?? 0)",
+        "duration": "\(response.duration)"
+      ]
+    )
   }
 }

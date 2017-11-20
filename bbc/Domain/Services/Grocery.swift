@@ -9,22 +9,22 @@
 import Foundation
 import UIKit
 
-enum GroceryError: Error {
+public enum GroceryError: Error {
   case unknown
   case badDataReceived
   case requestFailed // TODO.. add more granular error reporting
 }
 
-typealias GroceryResult = Result<[Fruit], GroceryError>
+public typealias GroceryResult = Result<[Fruit], GroceryError>
 
-protocol GroceryAssistant {
+public protocol GroceryAssistant: class {
   func fruit(completion: @escaping (GroceryResult) -> ())
 }
 
 class Grocery: GroceryAssistant {
   let api: APIInterface
 
-  init(api: APIInterface = API.shared) {
+  init(api: APIInterface) {
     self.api = api
   }
 

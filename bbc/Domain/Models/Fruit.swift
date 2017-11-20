@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct Fruit: Codable {
+public struct Fruit: Codable {
   let type: String
   let price: Int
   let weight: Int
 }
 
-struct FruitViewModel {
+public struct FruitViewModel {
   let model: Fruit
 
   var displayName: String { return model.type.capitalized }

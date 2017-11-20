@@ -16,12 +16,16 @@ class FruitDetailSpec: QuickSpec {
   override func spec() {
     var sut: FruitDetailView!
     var ui: FruitDetailUISpy!
-    var assembly: FruitDetailAssemblyTest!
+    var assembly: FruitDetailAssembly!
 
     describe("Fruit detail") {
       beforeEach {
         ui = FruitDetailUISpy()
-        assembly = FruitDetailAssemblyTest()
+        assembly = FruitDetailAssembly(
+          wireframe: FruitDetailWireframeSpy(),
+          fruit: FruitFactory.apple(),
+          usage: UsageReporterSpy()
+        )
         sut = FruitDetailAssembler.assemble(assembly: assembly) as! FruitDetailView
         sut.presenter.ui = ui
       }
@@ -32,9 +36,9 @@ class FruitDetailSpec: QuickSpec {
         it("sends the correct usage report for display") {
           let usage = assembly.usage as! UsageReporterSpy
 
-          expect(usage.regiesteredReport).toNot(beNil())
-          expect(usage.regiesteredReport?.name).to(equal(UsageReport.Name.display))
-          expect(usage.regiesteredReport?.data["fruit-type"]).to(equal(assembly.fruit.type))
+          expect(usage.reports.first).toNot(beNil())
+          expect(usage.reports.first?.name).to(equal(UsageReport.Name.display))
+          expect(usage.reports.first?.data["fruit-type"]).to(equal(assembly.fruit.type))
         }
         it("updates the ui with the correctly formatted fruit information") {
           expect(ui.content?.doneButtonTitle).to(equal("DONE"))
@@ -59,12 +63,6 @@ class FruitDetailSpec: QuickSpec {
       }
     }
   }
-}
-
-class FruitDetailAssemblyTest: FruitDetailAssembly {
-  var wireframe: FruitDetailWireframe = FruitDetailWireframeSpy()
-  var fruit: Fruit = FruitFactory.apple()
-  var usage: UsageReporter = UsageReporterSpy()
 }
 
 class FruitDetailUISpy: FruitDetailUI {

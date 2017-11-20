@@ -9,13 +9,7 @@
 import Foundation
 import UIKit
 
-protocol FruitDetailAssembly {
-  var wireframe: FruitDetailWireframe { get set }
-  var fruit: Fruit { get set }
-  var usage: UsageReporter { get set }
-}
-
-struct FruitDetailAssemblyDefault: FruitDetailAssembly {
+struct FruitDetailAssembly {
   var wireframe: FruitDetailWireframe
   var fruit: Fruit
   var usage: UsageReporter

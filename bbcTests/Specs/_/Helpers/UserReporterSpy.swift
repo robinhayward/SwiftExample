@@ -11,9 +11,9 @@ import Foundation
 @testable import bbc
 
 class UsageReporterSpy: UsageReporter {
-  var regiesteredReport: UsageReport?
+  var reports: [UsageReport] = [UsageReport]()
 
   func register(_ report: UsageReport, completion: ((UsageReportError?) -> ())?) {
-    regiesteredReport = report
+    reports.append(report)
   }
 }

@@ -15,7 +15,7 @@ class AppRouter {
 
   private var root: UINavigationController?
 
-  init(factory: AppRouterFactory = AppRouterFactory()) {
+  init(factory: AppRouterFactory = AppRouterFactory(sdk: SupermarketSDK())) {
     self.factory = factory
   }
 
@@ -44,14 +44,26 @@ extension AppRouter: FruitDetailWireframe {
 
 // MARK: - Factory
 
-class AppRouterFactory {
+struct AppRouterFactory {
+  let sdk: Supermarket
+
   func listings(wireframe: FruitListingWireframe) -> UINavigationController {
-    let assembly = FruitListingAssemblyDefault(wireframe: wireframe, grocery: Grocery(), usage: Usage())
+    let assembly = FruitListingAssembly(
+      wireframe: wireframe,
+      grocery: sdk.grocer(),
+      usage: sdk.reporter()
+    )
+    
     return FruitListingAssembler.assembleWithinNavigationController(assembly: assembly)
   }
 
   func detail(wireframe: FruitDetailWireframe, fruit: Fruit) -> UIViewController {
-    let assembly = FruitDetailAssemblyDefault(wireframe: wireframe, fruit: fruit, usage: Usage())
+    let assembly = FruitDetailAssembly(
+      wireframe: wireframe,
+      fruit: fruit,
+      usage: sdk.reporter()
+
+    )
     return FruitDetailAssembler.assemble(assembly: assembly)
   }
 }

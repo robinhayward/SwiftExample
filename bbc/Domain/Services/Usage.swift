@@ -8,12 +8,12 @@
 
 import Foundation
 
-enum UsageReportError: Error {
+public enum UsageReportError: Error {
   case badRequestData
   case requestFailed // TODO.. add more granular error reporting
 }
 
-struct UsageReport {
+public struct UsageReport {
   enum Name: String {
     case load, display, error
   }
@@ -22,18 +22,18 @@ struct UsageReport {
   let data: [String: String]
 }
 
-protocol UsageReporter {
+public protocol UsageReporter: class {
   func register(_ report: UsageReport, completion: ((UsageReportError?) -> ())?)
 }
 
 class Usage: UsageReporter {
   let api: APIInterface
 
-  init(api: APIInterface = API.shared) {
+  init(api: APIInterface) {
     self.api = api
   }
 
   func register(_ report: UsageReport, completion: ((UsageReportError?) -> ())?) {
-    api.send(report, completion)
+    api.track(report, completion)
   }
 }

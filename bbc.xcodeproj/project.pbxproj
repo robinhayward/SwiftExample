@@ -55,6 +55,8 @@
 		0B6BF68C1FBF129100245157 /* FruitResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BF68B1FBF129100245157 /* FruitResponse.swift */; };
 		0B6BF68E1FBF140200245157 /* UsageReportRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BF68D1FBF140200245157 /* UsageReportRequest.swift */; };
 		0BD510E71FBF2EED00FDAE69 /* FruitListingSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD510E61FBF2EED00FDAE69 /* FruitListingSpec.swift */; };
+		0BE77F191FC2BADA00FED14E /* Supermarket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE77F181FC2BADA00FED14E /* Supermarket.swift */; };
+		0BE77F1F1FC2BF2800FED14E /* InterfaceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE77F1E1FC2BF2800FED14E /* InterfaceSpec.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +134,8 @@
 		0B6BF68B1FBF129100245157 /* FruitResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitResponse.swift; sourceTree = "<group>"; };
 		0B6BF68D1FBF140200245157 /* UsageReportRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageReportRequest.swift; sourceTree = "<group>"; };
 		0BD510E61FBF2EED00FDAE69 /* FruitListingSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitListingSpec.swift; sourceTree = "<group>"; };
+		0BE77F181FC2BADA00FED14E /* Supermarket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Supermarket.swift; sourceTree = "<group>"; };
+		0BE77F1E1FC2BF2800FED14E /* InterfaceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceSpec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +215,7 @@
 			children = (
 				0B33074A1FBF323300CE0026 /* _ */,
 				0BD510E51FBF2ED800FDAE69 /* Specs */,
+				0BE77F1C1FC2BF0C00FED14E /* Integration */,
 				0B295CE71FBC8EF700898DA7 /* Info.plist */,
 			);
 			path = bbcTests;
@@ -254,6 +259,7 @@
 		0B295D0F1FBC909400898DA7 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				0BE77F171FC2BAC500FED14E /* Interface */,
 				0B295D391FBCA62A00898DA7 /* Services */,
 				0B0A7DA81FBED09600293ED2 /* Infrastructure */,
 				0B295D361FBCA50400898DA7 /* Helpers */,
@@ -340,6 +346,7 @@
 		0B33075D1FBF468B00CE0026 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				0BE77F1D1FC2BF1E00FED14E /* Interface */,
 				0B3307701FBF56C100CE0026 /* Infrastructure */,
 				0B3307601FBF46C200CE0026 /* Services */,
 			);
@@ -424,6 +431,29 @@
 				0B33075D1FBF468B00CE0026 /* Domain */,
 			);
 			path = Specs;
+			sourceTree = "<group>";
+		};
+		0BE77F171FC2BAC500FED14E /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				0BE77F181FC2BADA00FED14E /* Supermarket.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		0BE77F1C1FC2BF0C00FED14E /* Integration */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Integration;
+			sourceTree = "<group>";
+		};
+		0BE77F1D1FC2BF1E00FED14E /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				0BE77F1E1FC2BF2800FED14E /* InterfaceSpec.swift */,
+			);
+			path = Interface;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -559,6 +589,7 @@
 				0B295CD11FBC8EF700898DA7 /* App.swift in Sources */,
 				0B295CFD1FBC8F4100898DA7 /* FruitDetailView.swift in Sources */,
 				0B295CFB1FBC8F4100898DA7 /* FruitDetailProtocols.swift in Sources */,
+				0BE77F191FC2BADA00FED14E /* Supermarket.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,6 +601,7 @@
 				0B3307571FBF3CA800CE0026 /* GroceryAssistantFake.swift in Sources */,
 				0B33075B1FBF42F200CE0026 /* FruitDetailSpec.swift in Sources */,
 				0B3307681FBF4B8900CE0026 /* NetworkResponseFactory.swift in Sources */,
+				0BE77F1F1FC2BF2800FED14E /* InterfaceSpec.swift in Sources */,
 				0B3307621FBF46D200CE0026 /* GrocerySpec.swift in Sources */,
 				0B3307551FBF3BE900CE0026 /* UserReporterSpy.swift in Sources */,
 				0BD510E71FBF2EED00FDAE69 /* FruitListingSpec.swift in Sources */,

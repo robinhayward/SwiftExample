@@ -15,25 +15,12 @@ import Nimble
 class GrocerySpec: QuickSpec {
   override func spec() {
     var sut: Grocery!
-    var api: API!
-    var network: NetworkFake!
+    var api: APISpy!
 
     describe("Grocery") {
       beforeEach {
-        network = NetworkFake()
-        api = API(network: network)
+        api = APISpy()
         sut = Grocery(api: api)
-      }
-
-      describe("fruit") {
-        beforeEach {
-          sut.fruit { r in }
-        }
-        it("sends a valid url request to the api") {
-          expect(network.request).toNot(beNil())
-          expect(network.request?.url?.absoluteString).to(equal("https://raw.githubusercontent.com/fmtvp/recruit-test-data/master/data.json"))
-          expect(network.request?.httpMethod).to(equal("GET"))
-        }
       }
 
       describe("fruit") {
@@ -44,48 +31,45 @@ class GrocerySpec: QuickSpec {
             sut.fruit { r in
               result = r
             }
-            network.completion?(NetworkResponseFactory.fruit())
+            api.fruitCompletion?(GroceryResult([FruitFactory.apple()]))
           }
           it("has a success result with fruit") {
             expect(result).toNot(beNil())
             expect(result?.successful()).to(beTrue())
           }
         }
+      }
 
-        describe("failure") {
-          context("server error") {
-            var result: GroceryResult?
+      describe("fruit") {
+        context("failure") {
+          var result: GroceryResult?
 
-            beforeEach {
-              sut.fruit { r in
-                result = r
-              }
-              network.completion?(NetworkResponseFactory.serverError())
+          beforeEach {
+            sut.fruit { r in
+              result = r
             }
-            it("has a failure result with an error") {
-              expect(result).toNot(beNil())
-              expect(result?.error()).toNot(beNil())
-              expect(result?.error()).to(equal(GroceryError.requestFailed))
-            }
+            api.fruitCompletion?(GroceryResult(GroceryError.requestFailed))
           }
-
-          context("bad json") {
-            var result: GroceryResult?
-
-            beforeEach {
-              sut.fruit { r in
-                result = r
-              }
-              network.completion?(NetworkResponseFactory.badFruit())
-            }
-            it("has a failure result with an error") {
-              expect(result).toNot(beNil())
-              expect(result?.error()).toNot(beNil())
-              expect(result?.error()).to(equal(GroceryError.badDataReceived))
-            }
+          it("has a failure result with an error") {
+            expect(result).toNot(beNil())
+            expect(result?.error()).toNot(beNil())
+            expect(result?.error()).to(equal(GroceryError.requestFailed))
           }
         }
       }
     }
+  }
+}
+
+class APISpy: APIInterface {
+  var fruitCompletion: ((GroceryResult) -> ())?
+  var trackCompletion: ((UsageReportError?) -> ())?
+
+  func fruit(_ completion: @escaping ((GroceryResult) -> ())) {
+    fruitCompletion = completion
+  }
+
+  func track(_ report: UsageReport, _ completion: ((UsageReportError?) -> ())?) {
+    trackCompletion = completion
   }
 }

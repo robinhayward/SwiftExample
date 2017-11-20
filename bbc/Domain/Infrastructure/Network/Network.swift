@@ -9,17 +9,23 @@
 import Foundation
 
 protocol NetworkInterface {
+  weak var reporter: NetworkReporter? { get set }
+
   func run(_ request: URLRequest, _ completion: @escaping ((NetworkResponse) -> ()))
 }
 
-class Network: NetworkInterface {
-  static let shared: Network = Network(session: URLSession.shared)
+protocol NetworkReporter: class {
+  func report(_ response: NetworkResponse)
+}
 
+class Network: NetworkInterface {
   let session: URLSession
+
+  weak var reporter: NetworkReporter?
 
   let log: Log = Log(enabled: true)
 
-  init(session: URLSession) {
+  init(session: URLSession = URLSession.shared) {
     self.session = session
   }
 
@@ -38,10 +44,15 @@ class Network: NetworkInterface {
   // MARK: - Private
 
   private func handle(_ response: NetworkResponse, with completion: @escaping ((NetworkResponse) -> ())) {
-    log.response(response)
-    SwitchToMainThread.with {
+    SwitchToMainThread.with { [weak self] in
+      self?.report(response)
       completion(response)
     }
+  }
+
+  private func report(_ response: NetworkResponse) {
+    log.response(response)
+    reporter?.report(response)
   }
 }
 

@@ -11,11 +11,19 @@ import Foundation
 @testable import bbc
 
 class NetworkFake: NetworkInterface {
+  var reporter: NetworkReporter?
   var request: URLRequest?
   var completion: ((NetworkResponse) -> ())?
 
   func run(_ request: URLRequest, _ completion: @escaping ((NetworkResponse) -> ())) {
     self.request = request
     self.completion = completion
+  }
+
+  func completeLastRequest(with response: NetworkResponse) {
+    guard let completion = completion else { return }
+
+    reporter?.report(response)
+    completion(response)
   }
 }
